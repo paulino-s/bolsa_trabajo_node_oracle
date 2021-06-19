@@ -29,7 +29,7 @@ const Empleos = (props) => {
                       <ul>
                         <li><div className="star-rating" data-rating="5.0"></div></li>
                         <li><img className="flag" src="images/flags/de.svg" alt="" /> {Heroe.nacionalidad}</li>
-                        <li><div className="verified-badge-with-title">Verificado por el IMCYC</div></li>
+                        <li><div className="verified-badge-with-title">Verificado por JobUES</div></li>
                       </ul>
                     </div>
                   </div>

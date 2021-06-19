@@ -13,16 +13,16 @@ const Login = (props) => {
 
               <div className="welcome-text" style={{display: props.registrado ? 'none' : 'block'}}>
                 <h3>BIENVENIDO</h3>
-                <h4 style={{paddingTop: '10px'}}>BOLSA DE TRABAJO DE LA INDUSTRIA DE LA CONSTRUCCIÓN</h4>
-                <p>Instituto Mexicano del Cemento y del Concreto A.C.</p>
-                <span>No tiene una cuenta?<br/>
-                  <Link to="/registro" className="button button-sliding-icon ripple-effect margin-top-10"> REGÍSTRESE AQUÍ! <i className="icon-material-outline-arrow-right-alt"></i></Link>
+                <h4 style={{paddingTop: '10px'}}>BOLSA DE TRABAJO JobUES</h4>
+                <p>Inicia un nuevo empleo al instante</p>
+                <span>¿Aún no tienes una cuenta?<br/>
+                  <Link to="/registro" className="button button-sliding-icon ripple-effect margin-top-10"> REGISTRO FÁCIL AQUÍ! <i className="icon-material-outline-arrow-right-alt"></i></Link>
                 </span>
               </div>
 
               <div className="welcome-text" style={{display: props.nota ? 'block' : 'none'}}>
                 <div className="notification error closeable">
-                  <p>Sus datos de usuario no son correctos,<br/><b>Por Favor vuelva a intentarlo... Gracias!</b></p>
+                  <p>Datos Ingresados Incorrectamente,<br/><b>Intenta Nuevamente!</b></p>
                   <Link className="close"></Link>
                 </div>
               </div>
@@ -30,7 +30,7 @@ const Login = (props) => {
               <div className="welcome-text" style={{display: props.registrado ? 'block' : 'none'}}>
                 <h3>Bienvenido!</h3>
                 <h4 style={{padding: '10px'}}>{props.email}</h4>
-                <h4 style={{paddingTop: '10px'}}>BOLSA DE TRABAJO DE LA INDUSTRIA DE LA CONSTRUCCIÓN</h4>
+                <h4 style={{paddingTop: '10px'}}>BOLSA DE TRABAJO JobUES</h4>
                 <div style={{display: 'flex',flexDirection: 'row'}}>
                   <Link to="/candidatos" className="button ripple-effect margin-top-30" style={{width: '100%',marginRight: '10px'}}>CANDIDATOS <i className="icon-material-outline-arrow-right-alt"></i></Link>
 

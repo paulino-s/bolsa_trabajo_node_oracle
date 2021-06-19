@@ -56,7 +56,7 @@ const Footer = () => {
         <div className="container">
           <div className="row">
             <div className="col-xl-12">
-              © 2019 <strong>Instituto Mexicano del Cemento y del Concreto A.C.</strong>. Todo Los Derechos Reservados.
+              © 2021 <strong>JobUES</strong>. Todo Los Derechos Reservados.
             </div>
           </div>
         </div>

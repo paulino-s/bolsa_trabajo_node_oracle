@@ -19,7 +19,7 @@ const PublicarCandidato = (props) => {
                         <h3>Nuevo Perfil</h3>
                         <nav id="breadcrumbs" className="dark">
                             <ul>
-                                <li><Link to="/dashboard">Home</Link></li>
+                                <li><Link to="/dashboard">Inicio</Link></li>
                                 <li><Link to="/dashboard">Panel de control</Link></li>
                                 <li>Publicar perfil de candidato</li>
                             </ul>
@@ -126,29 +126,20 @@ const PublicarCandidato = (props) => {
                                             <div className="submit-field">
                                                 <h5>Ciudad:</h5>
                                                 <select name="ciudad" data-size="7" title="Select Job Type" required>
-                                                    <option value="Aguascalientes">Aguascalientes</option>
-                                                    <option value="Baja California">Baja California</option>
-                                                    <option value="Baja California Sur">Baja California Sur</option>
-                                                    <option value="Campeche">Campeche</option>
-                                                    <option value="Coahuila">Coahuila</option>
-                                                    <option value="Colima">Colima</option>
-                                                    <option value="Chiapas">Chiapas</option>
-                                                    <option value="Chihuahua">Chihuahua</option>
-                                                    <option value="Ciudad de México">Ciudad de México</option>
-                                                    <option value="Durango">Durango</option>
-                                                    <option value="Estado de México">Estado de México</option>
-                                                    <option value="Guanajuato">Guanajuato</option>
-                                                    <option value="Guerrero">Guerrero</option>
-                                                    <option value="Hidalgo">Hidalgo</option>
-                                                    <option value="Jalisco">Jalisco</option>
-                                                    <option value="Michoacán">Michoacán</option>
-                                                    <option value="Morelos">Morelos</option>
-                                                    <option value="Nayarit">Nayarit</option>
-                                                    <option value="Nuevo León">Nuevo León</option>
-                                                    <option value="Oaxaca">Oaxaca</option>
-                                                    <option value="Puebla">Puebla</option>
-                                                    <option value="Querétaro">Querétaro</option>
-                                                    <option value="Quintana Roo">Quintana Roo</option>
+                                                <option value="AH">Ahuachapán</option>
+									<option value="SA">Santa Ana</option>
+                                    <option value="SO">Sonsonate</option>
+                                    <option value="CH">Chalatenango</option>
+                                    <option value="LL">La Libertad</option>
+                                    <option value="SS">San Salvador</option>
+                                    <option value="CU">Cuscatlan</option>
+                                    <option value="PA">La Paz</option>
+                                    <option value="CA">Cabañas</option>
+                                    <option value="SV">San Vicente</option>
+                                    <option value="US">Usulutan</option>
+                                    <option value="SM">San Miguel</option>
+                                    <option value="NY">Morazan</option>
+                                    <option value="UN">La Union</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -174,13 +165,13 @@ const PublicarCandidato = (props) => {
                                                     <div className="col-xl-6">
                                                         <div className="input-with-icon">
                                                             <input name="sueldoMin" className="with-border" type="text" placeholder="Min" required/>
-                                                            <i className="currency">MX</i>
+                                                            <i className="currency">DL</i>
                                                         </div>
                                                     </div>
                                                     <div className="col-xl-6">
                                                         <div className="input-with-icon">
                                                             <input name="sueldoMax" className="with-border" type="text" placeholder="Max" required/>
-                                                            <i className="currency">MX</i>
+                                                            <i className="currency">DL</i>
                                                         </div>
                                                     </div>
                                                 </div>
