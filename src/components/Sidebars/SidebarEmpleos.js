@@ -70,11 +70,7 @@ const SidebarEmpleos = (props) => {
 							<label className="switch"><input type="checkbox"/><span className="switch-button"></span> Medio Tiempo</label>
 						</div>
 					</div>
-          <div className="switches-list">
-						<div className="switch-container">
-							<label className="switch"><input type="checkbox"/><span className="switch-button"></span> Prácticas</label>
-						</div>
-					</div>
+        
           <div className="switches-list">
 						<div className="switch-container">
 							<label className="switch"><input type="checkbox"/><span className="switch-button"></span> Temporal</label>

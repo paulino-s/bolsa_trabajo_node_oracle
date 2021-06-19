@@ -31,10 +31,10 @@ class Registro extends Component {
                     <h3 style={{fontSize: '26px',display: this.props.registrado ? 'block' : 'none'}}>BIENVENIDO </h3>
                     <h3 style={{color: '#0073a5',padding: '20px'}}>{this.props.nombre}</h3>
                   </div>
-                  <h4 style={{paddingTop: '10px'}}>BOLSA DE TRABAJO DE LA INDUSTRIA DE LA CONSTRUCCIÓN</h4>
-                  <p>Instituto Mexicano del Cemento y del Concreto A.C.</p>
+                  <h4 style={{paddingTop: '10px'}}>BOLSA DE TRABAJO | JobUES</h4>
+                  <p>Tu Lugar Ideal, Exclusivo Egresados Familia UES</p>
                   <span style={{display: this.props.registrado ? 'none' : 'block'}}>Ya tiene una cuenta?<br/>
-                    <Link to="/" className="button button-sliding-icon ripple-effect margin-top-10"> INGRESAR! <i className="icon-material-outline-arrow-right-alt"></i></Link>
+                    <Link to="/" className="button button-sliding-icon ripple-effect margin-top-10"> INGRESAR <i className="icon-material-outline-arrow-right-alt"></i></Link>
                   </span>
                 </div>
 
