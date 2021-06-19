@@ -1,5 +1,5 @@
 import React from 'react';
-import logoblanco from '../../logo-blanco.svg';
+import logoblanco from '../../jobuesb.png';
 
 const Footer = () => {
   return (
@@ -12,7 +12,7 @@ const Footer = () => {
                 <div className="footer-rows-left">
                   <div className="footer-row">
                     <div className="footer-row-inner footer-logo">
-                      <img src={logoblanco} alt="imcyc" title="imcyc" style={{width: '150px'}} />
+                      <img src={logoblanco} alt="JobUES" title="JobUES" style={{width: '150px'}} />
                     </div>
                   </div>
                 </div>
@@ -39,14 +39,11 @@ const Footer = () => {
         <div className="container">
           <div className="row">
             <div className="col-xl-4 col-lg-4 col-md-12"></div>
-            <div className="col-xl-4 col-lg-4 col-md-12"></div>
+            
             <div className="col-xl-4 col-lg-4 col-md-12" style={{marginTop: '20px',marginBottom: '20px'}}>
               <h3><i className="icon-feather-mail"></i> Pedir Información</h3>
-              <p>Reciba información y las últimas noticias..</p>
-              <form action="#" method="get" className="newsletter">
-                <input type="text" name="fname" placeholder="Ingresar Correo electrónico"/>
-                <button type="submit"><i className="icon-feather-arrow-right"></i></button>
-              </form>
+              <p>Gana Tu Primer Trabajo Con Nosotros</p>
+              
             </div>
           </div>
         </div>
