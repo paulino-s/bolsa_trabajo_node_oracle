@@ -34,7 +34,7 @@ const Empleo = (props) => {
                       <li><a href="single-company-profile.html"><i className="icon-material-outline-business"></i> {Heroe.ciudad}</a></li>
                       <li><div className="star-rating" data-rating="4.9"></div></li>
                       <li><img className="flag" src="images/flags/gb.svg" alt="" /> {Heroe.tipoVacante}</li>
-                      <li><div className="verified-badge-with-title">Verificado por IMCYC</div></li>
+                      <li><div className="verified-badge-with-title">Verificado por JobUES</div></li>
                     </ul>
                   </div>
                 </div>
