@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { HashRouter, Route, Switch, withRouter, Redirect } from "react-router-dom";
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -57,14 +56,14 @@ class App extends Component {
     };
     this.handlePublicarEmpleo = this.handlePublicarEmpleo.bind(this);
   }
-
+//Muestra informacion de los candidatos
   componentDidMount() {
     axios.get(`http://18.219.47.222/apis/bolsadetrabajo/candidatos.php`)
       .then(res => {
         const candidatos = res.data;
         this.setState({ candidatos });
       })
-    
+//Muestra informacion de empresas    
     axios.get(`http://18.219.47.222/apis/bolsadetrabajo/empresas.php`)
       .then(res => {
         const empresas = res.data;
@@ -90,20 +89,20 @@ class App extends Component {
       email: this.state.email,
       password: this.state.password
     };
-
+//Crear Usuario
     axios.post(`http://18.219.47.222/apis/bolsadetrabajo/insertuser.php`, { user })
       .then(res => {
         console.log(res);
         console.log(res.data);
       })
-
+//Muestra informacion de candidatos
     axios.get(`http://18.219.47.222/apis/bolsadetrabajo/candidatos.php`)
       .then(res => {
         const candidatos = res.data;
         this.setState({ candidatos });
       })
   }
-
+//No se para que es
   verEmpleo = () => {
     console.log('cacatua');
   };
@@ -177,13 +176,13 @@ class App extends Component {
     }
 
     console.log(empresa);
-
+//Crear empresa
     axios.post(`http://18.219.47.222/apis/bolsadetrabajo/insertempresa.php`, { empresa })
       .then(res => {
         console.log(res);
         console.log(res.data);
       })
-
+//Mostrar empresas
     axios.get(`http://18.219.47.222/apis/bolsadetrabajo/empresas.php`)
       .then(res => {
         const candidatos = res.data;
@@ -215,13 +214,13 @@ class App extends Component {
         descripcion: event.target.descripcion.value,
         visible: event.target.visible.value,
     };
-
+//Crear candidatos
     axios.post(`http://18.219.47.222/apis/bolsadetrabajo/insertcandidato.php`, { candidato })
       .then(res => {
         console.log(res);
         console.log(res.data);
       })
-
+//Mostrar candidatos
     axios.get(`http://18.219.47.222/apis/bolsadetrabajo/candidatos.php`)
       .then(res => {
         const candidatos = res.data;
@@ -241,7 +240,7 @@ class App extends Component {
       emailaddress: emailaddress,
       password: password
     }
-
+//Mostrar Usuarios
     axios.post(`http://18.219.47.222/apis/bolsadetrabajo/showusuarios.php`, { usuario })
       .then(res => {
         console.log(res);
@@ -281,7 +280,7 @@ class App extends Component {
       empresa: event.target.empresa.value,
       telefono: event.target.telefono.value,
     };
-
+//Crear Usuario
     axios.post(`http://18.219.47.222/apis/bolsadetrabajo/insertusuario.php`, { usuario })
       .then(res => {
         console.log(res);
