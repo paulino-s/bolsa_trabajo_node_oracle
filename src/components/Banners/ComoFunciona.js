@@ -9,7 +9,7 @@ const ComoFunciona = () => {
 
           <div className="col-xl-12">
             <div className="section-headline centered margin-top-0 margin-bottom-5">
-              <h3>Cómo Funciona?</h3>
+              <h3>¿Cómo Funciona?</h3>
             </div>
           </div>
           
@@ -22,7 +22,7 @@ const ComoFunciona = () => {
                 </div>
               </div>
               <Link to="/registro"><h3>Crear una cuenta</h3></Link>
-              <p>Si usted es una empresa en busca de talento o una persona en busca de un empleo en la industria de la construcción.</p>
+              <p>Si eres un Estudiante Egresado o una Empresa del Sector, JobUES es tu gran oportunidad</p>
             </div>
           </div>
 
@@ -34,8 +34,8 @@ const ComoFunciona = () => {
                   <div className="icon-box-check"><i className="icon-material-outline-check"></i></div>
                 </div>
               </div>
-              <h3>Publique o Consulte Ofertas</h3>
-              <p>Publique o consulte las mejores ofertas de empleo para profesinales de la construcción.</p>
+              <h3>Publique o Consulte Estudiantes</h3>
+              <p>Publique o consulte las mejores ofertas de empleo para profesinales Universitarios</p>
             </div>
           </div>
 
@@ -47,8 +47,8 @@ const ComoFunciona = () => {
                   <div className="icon-box-check"><i className="icon-material-outline-check"></i></div>
                 </div>
               </div>
-              <h3>Respaldo IMCYC</h3>
-              <p>Tenga las certeza de que los perfiles y empresas publicados aquí cuentan con certificación IMCYC.</p>
+              <h3>Respaldo JobUES</h3>
+              <p>Sin temor, todos los perfiles y empresas, estan comprometidos y registrados</p>
             </div>
           </div>
 

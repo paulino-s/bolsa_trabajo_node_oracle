@@ -8,9 +8,9 @@ const IntroBanner = () => {
           <div className="col-md-12">
             <div className="banner-headline">
               <h3>
-                <strong>Bolsa de trabajo especializada de la Construcción</strong>
+                <strong>Bolsa de Trabajo Exclusiva Estudiantes Universitarios</strong>
                 <br/>
-                <span>Encuentra la vacante/candidato que estás buscando <strong className="color">IMCYC</strong> compartir el conocimiento.</span>
+                <span>Si eres parte de la familia UES <strong className="color">JobUES</strong> Tu primera Opcion.</span>
               </h3>
             </div>
           </div>

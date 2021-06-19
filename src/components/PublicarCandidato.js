@@ -104,7 +104,7 @@ const PublicarCandidato = (props) => {
                                                     <option value="Por Temporada">Por Temporada</option>
                                                     <option value="Tiempo Completo">Tiempo Completo</option>
                                                     <option value="Medio Tiempo">Medio Tiempo</option>
-                                                    <option value="Prácticas Profesionales">Prácticas Profesionales</option>
+                                        
                                                     <option value="Temporal">Temporal</option>
                                                 </select>
                                             </div>
