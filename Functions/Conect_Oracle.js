@@ -1,4 +1,4 @@
-const dbConfig = import('./dbconfig.js')
+const dbConfig = import('./dbconfig.js.js')
 const oracledb = require('oracledb');
 const dbconfig = require('../dbconfig.js');
 
