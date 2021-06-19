@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="http://www.imcyc.com/wp-content/uploads/2017/07/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>BOLSA DE TRABAJO | Instituto Mexicano del Cemento y del Concreto A.C.</title>
+    <link rel="stylesheet" href="https://imcyc.github.io/bolsadetrabajo/css/style.css">
+    <link rel="stylesheet" href="https://imcyc.github.io/bolsadetrabajo/css/colors/blue.css">
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+
+    <script src="https://imcyc.github.io/bolsadetrabajo/js/jquery-3.3.1.min.js"></script>
+    <script src="https://imcyc.github.io/bolsadetrabajo/js/jquery-migrate-3.0.0.min.js"></script>
+    <script src="https://imcyc.github.io/bolsadetrabajo/js/mmenu.min.js"></script>
+    <script src="https://imcyc.github.io/bolsadetrabajo/js/tippy.all.min.js"></script>
+    <script src="https://imcyc.github.io/bolsadetrabajo/js/simplebar.min.js"></script>
+    <script src="https://imcyc.github.io/bolsadetrabajo/js/bootstrap-slider.min.js"></script>
+    <script src="https://imcyc.github.io/bolsadetrabajo/js/bootstrap-select.min.js"></script>
+    <script src="https://imcyc.github.io/bolsadetrabajo/js/snackbar.js"></script>
+    <script src="https://imcyc.github.io/bolsadetrabajo/js/clipboard.min.js"></script>
+    <script src="https://imcyc.github.io/bolsadetrabajo/js/counterup.min.js"></script>
+    <script src="https://imcyc.github.io/bolsadetrabajo/js/magnific-popup.min.js"></script>
+    <script src="https://imcyc.github.io/bolsadetrabajo/js/slick.min.js"></script>
+    <script src="https://imcyc.github.io/bolsadetrabajo/js/custom.js"></script>
+
+    <!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
+    <script>
+    // Snackbar for user status switcher
+    $('#snackbar-user-status label').click(function() { 
+      Snackbar.show({
+        text: 'Your status has been changed!',
+        pos: 'bottom-center',
+        showAction: false,
+        actionText: "Dismiss",
+        duration: 3000,
+        textColor: '#fff',
+        backgroundColor: '#383838'
+      }); 
+    }); 
+    </script>
+
+
+    <!-- Google Autocomplete -->
+    <script>
+      function initAutocomplete() {
+        var options = {
+          types: ['(cities)'],
+          // componentRestrictions: {country: "us"}
+        };
+
+        var input = document.getElementById('autocomplete-input');
+        var autocomplete = new google.maps.places.Autocomplete(input, options);
+      }
+
+      // Autocomplete adjustment for homepage
+      if ($('.intro-banner-search-form')[0]) {
+          setTimeout(function(){ 
+              $(".pac-container").prependTo(".intro-search-field.with-autocomplete");
+          }, 300);
+      }
+
+    </script>
+
+    <!-- Google API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmvFMVKyMqUmdpFkVVMb2eH6OnBOJiKSM&libraries=places&callback=initAutocomplete"></script>
+  </body>
+</html>
