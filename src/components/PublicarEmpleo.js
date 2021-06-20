@@ -17,7 +17,7 @@ const PublicarEmpleo = (props) => {
           style={{ marginBottom: "50px" }}
         >
           <div className="dashboard-headline">
-            <h3>Nueva Vacante</h3>
+            <h3>Publicar un Empleo</h3>
             <nav id="breadcrumbs" className="dark">
               <ul>
                 <li>
@@ -75,65 +75,47 @@ const PublicarEmpleo = (props) => {
                           </select>
                         </div>
                       </div>
+                      <div className="col-xl-4">
+                                            <div className="submit-field">
+                                                <h5>Rubro Empresarial:</h5>
+                                                <select name="rubro" data-size="7" title="Select Job Type" required>
+                                                    <option value="com">Comercio</option>
+                                                    <option value="ali">Alimenticio</option>
+                                                    <option value="srv">Servicios Varios</option>
+                                                    <option value="med">Medicina</option>
+                                                    <option value="tra">Transporte</option>
+                                                    <option value="comu">Comunicaiones</option>
+                                                    <option value="edu">Educacion</option>
+                                                    <option value="tec">Tecnologia</option>
+                                                    <option value="otr">Otro</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div className="col-xl-4">
+                                            <div className="submit-field">
+                                                <h5>Habilidades:</h5>
+                                                <input name="Habilidades" type="text" className="with-border" required />
+                                            </div>
+                                        </div>
+                                      
+                                        <div className="col-xl-4">
+                                            <div className="submit-field">
+                                                <h5>Perfil Academico:</h5>
+                                                <select name="perfilacademico" data-size="7" title="Select Job Type" required>
+                                                    <option value="Técnico">Técnico</option>
+                                                    <option value="Licenciatura">Licenciatura</option>
+                                                    <option value="Maestría">Maestría</option>
+                                                    <option value="Doctorado">Doctorado</option>
+                                                    <option value="Otro">Otro</option>
+                                                </select>
+                                            </div>
+                                        </div>            
+
+                     
 
                       <div className="col-xl-4">
                         <div className="submit-field">
-                          <h5>Categoría:</h5>
-                          <select
-                            name="categoria"
-                            data-size="7"
-                            title="Categoría"
-                            required
-                          >
-                            <option value="Ingeniero Civil">
-                              Ingeniero Civil
-                            </option>
-                            <option value="Ingeniero Estructural">
-                              Ingeniero Estructural
-                            </option>
-                            <option value="Laboratorista de concreto">
-                              Laboratorista de concreto
-                            </option>
-                            <option value="Arquitecto">Arquitecto</option>
-                            <option value="Dibujante">Dibujante</option>
-                            <option value="Técnico de Mantenimiento">
-                              Técnico de Mantenimiento
-                            </option>
-                            <option value="Supervisor de Obra">
-                              Supervisor de Obra
-                            </option>
-                            <option value="Operador de Maquinaria">
-                              Operador de Maquinaria
-                            </option>
-                            <option value="Chofer de revolvedora">
-                              Chofer de revolvedora
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div className="col-xl-4">
-                        <div className="submit-field">
-                          <h5>Ubicación:</h5>
-                          <div className="input-with-icon">
-                            <div id="autocomplete-container">
-                              <input
-                                name="ubicacion"
-                                id="autocomplete-input"
-                                className="with-border"
-                                type="text"
-                                placeholder="Dirección"
-                                required
-                              />
-                            </div>
-                            <i className="icon-material-outline-location-on"></i>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="col-xl-4">
-                        <div className="submit-field">
-                          <h5>Ciudad:</h5>
+                          <h5>Lugar de Trabajo:</h5>
                           <select
                             name="ciudad"
                             data-size="7"
@@ -157,51 +139,46 @@ const PublicarEmpleo = (props) => {
                           </select>
                         </div>
                       </div>
-
                       <div className="col-xl-4">
-                        <div className="submit-field">
-                          <h5>Sueldo:</h5>
-                          <div className="row">
-                            <div className="col-xl-6">
-                              <div className="input-with-icon">
-                                <input
-                                  name="sueldoMin"
-                                  className="with-border"
-                                  type="text"
-                                  placeholder="Min"
-                                  required
-                                />
-                                <i className="currency">MX</i>
-                              </div>
-                            </div>
-                            <div className="col-xl-6">
-                              <div className="input-with-icon">
-                                <input
-                                  name="sueldoMax"
-                                  className="with-border"
-                                  type="text"
-                                  placeholder="Max"
-                                  required
-                                />
-                                <i className="currency">MX</i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
+                                            <div className="submit-field">
+                                                <h5>Dirección Empresa:</h5>
+                                                <div className="input-with-icon">
+                                                    <div id="autocomplete-container">
+                                                        <input name="direccion_empresa" id="autocomplete-input" className="with-border" type="text" placeholder="Dirección" required />
+                                                    </div>
+                                                    <i className="icon-material-outline-location-on"></i>
+                                                </div>
+                                            </div>
+                                        </div>
                       <div className="col-xl-4">
-                        <div className="submit-field">
-                          <h5>Nombre de Contacto:</h5>
-                          <input
-                            name="contacto"
-                            type="text"
-                            className="with-border"
-                            required
-                          />
-                        </div>
-                      </div>
+                                            <div className="submit-field">
+                                                <h5>Experiencia:</h5>
+                                                <input name="experiencia_laboral" type="number" className="with-border" required/>
+                                            </div>
+                                        </div>
+                      <div className="col-xl-4">
+                                            <div className="submit-field">
+                                                <h5>Salario Ofertado:</h5>
+                                                <div className="row">
+                                                    <div className="col-xl-6">
+                                                        <div className="input-with-icon">
+                                                            <input name="salarioMin" className="with-border" type="text" placeholder="Min" required/>
+                                                            <i className="currency">BTC</i>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-xl-6">
+                                                        <div className="input-with-icon">
+                                                            <input name="salarioMax" className="with-border" type="text" placeholder="Max" required/>
+                                                            <i className="currency">BTC</i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
+                 
+
+                                    
                       <div className="col-xl-12">
                         <div className="submit-field">
                           <h5>Descripción:</h5>
