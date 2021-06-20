@@ -48,15 +48,25 @@ const PublicarCandidato = (props) => {
 
                                         <div className="col-xl-4">
                                             <div className="submit-field">
-                                                <h5>Apellido Paterno:</h5>
+                                                <h5>Apellido (s):</h5>
                                                 <input name="apellidoPaterno" type="text" className="with-border" required />
+                                            </div>
+                                        </div>
+                                        <div className="col-xl-4">
+                                            <div className="submit-field">
+                                                <h5>Carnet:</h5>
+                                                <input name="id_estudiante" type="text" className="with-border" required />
                                             </div>
                                         </div>
 
                                         <div className="col-xl-4">
                                             <div className="submit-field">
-                                                <h5>Apellido Materno:</h5>
-                                                <input name="apellidoMaterno" type="text" className="with-border" required />
+                                                <h5>Sexo</h5>
+                                                <select name="jornada" data-size="7" title="Select Genero" required>
+                                                    <option value="masculino">Masculino</option>
+                                                    <option value="femenino">Femenino</option>
+                                        
+                                                </select>
                                             </div>
                                         </div>
 
@@ -112,6 +122,23 @@ const PublicarCandidato = (props) => {
 
                                         <div className="col-xl-4">
                                             <div className="submit-field">
+                                                <h5>Nacionalidad</h5>
+                                                <select name="jornada" data-size="7" title="Select Nacionalidad" required>
+                                                    <option value="Nacional">Nacional</option>
+                                                    <option value="Extranjero">Extranjero</option>
+                                        
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div className="col-xl-4">
+                                            <div className="submit-field">
+                                                <h5>Pasaporte:</h5>
+                                                <input name="pasaporte" type="text" className="with-border" placeholder="Solo si es Extranjero"/>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-xl-4">
+                                            <div className="submit-field">
                                                 <h5>Dirección:</h5>
                                                 <div className="input-with-icon">
                                                     <div id="autocomplete-container">
@@ -146,8 +173,14 @@ const PublicarCandidato = (props) => {
 
                                         <div className="col-xl-4">
                                             <div className="submit-field">
-                                                <h5>Teléfono:</h5>
-                                                <input name="telefono" type="text" className="with-border" required />
+                                                <h5>Teléfono Fijo:</h5>
+                                                <input name="telefonofijo" type="number" className="with-border"/>
+                                            </div>
+                                        </div>
+                                        <div className="col-xl-4">
+                                            <div className="submit-field">
+                                                <h5>Teléfono Personal:</h5>
+                                                <input name="telefonopersonal" type="number" className="with-border" required />
                                             </div>
                                         </div>
 
@@ -155,6 +188,24 @@ const PublicarCandidato = (props) => {
                                             <div className="submit-field">
                                                 <h5>Correo Electrónico:</h5>
                                                 <input name="email" type="text" className="with-border" required />
+                                            </div>
+                                        </div>
+                                        <div className="col-xl-4">
+                                            <div className="submit-field">
+                                                <h5>NIT:</h5>
+                                                <input name="nit" type="number" className="with-border" required />
+                                            </div>
+                                        </div>
+                                        <div className="col-xl-4">
+                                            <div className="submit-field">
+                                                <h5>NUP:</h5>
+                                                <input name="nup" type="number" className="with-border" />
+                                            </div>
+                                        </div>
+                                        <div className="col-xl-4">
+                                            <div className="submit-field">
+                                                <h5>Facebook:</h5>
+                                                <input name="red_social" type="text" className="with-border" placeholder= "Usuario Facebook"/>
                                             </div>
                                         </div>
 
