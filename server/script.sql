@@ -92,6 +92,17 @@ exception
         rollback;
 end;
 
+create or replace procedure listarVacantes (vacantes out var_bolsa_trabajo.cur_vacantes) is
+begin
+    open vacantes for select * from perfil;
+end;
+
+--PACKAGE
+
+create or replace package var_bolsa_trabajo
+as
+    type cur_vacantes is ref cursor return perfil%rowtype;
+end var_bolsa_trabajo;
 
 
 

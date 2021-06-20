@@ -7,17 +7,17 @@ var db = {
 };
 
 /*FUNCION PARA LLAMAR DB*/
-async function query(sql, binds, autoCommit) {
+async function getConnection() {
   try {
     let con = await oracledb.getConnection(db);
-    let result = await con.execute(sql, binds, { autoCommit: true });
-    con.release();
-    return result;
+    /*let result = await con.execute(sql, binds, { autoCommit: true });
+    con.release();*/
+    return con;
   } catch (error) {
     console.log(error);
   }
 }
 
 module.exports = {
-  query,
+  getConnection,
 };
