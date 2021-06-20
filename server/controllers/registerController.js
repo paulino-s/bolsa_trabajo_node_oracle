@@ -21,12 +21,29 @@ module.exports = {
       },
     });
 
-    /*
-    let result = await query(`insert into USUARIO values(:id, :email, :pass)`, {
-      id: 1,
-      email: email,
-      pass: password,
-    });*/
+    console.log(result.outBinds);
+
+    res.json(result.outBinds);
+  },
+  registrarEmpresa: async (req, res) => {
+    let { nombre, nombre_empresa, email, telefono, password } = req.body;
+
+    console.log(nombre, nombre_empresa, email, telefono, password);
+
+    let result = await query(
+      `
+        BEGIN
+          insertarEmpresa(:nombre, :empresa, :email, :telefono, :password); 
+        END;
+      `,
+      {
+        nombre,
+        empresa: nombre_empresa,
+        email,
+        telefono,
+        password,
+      }
+    );
 
     console.log(result.outBinds);
 
