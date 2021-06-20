@@ -4,7 +4,23 @@ CREATE TABLE DATOS_ESTUDIANTE(
     IDESTUDIANTE INTEGER,
     IDUSUARIO INTEGER,
     NOMBRE_ESTUDIANTE VARCHAR2(50),
-    EMAIL VARCHAR2(50)
+    EMAIL VARCHAR2(50),
+    APELLIDOS VARCHAR2(50),
+    SEXO VARCHAR2(10),
+    FECHA_NACIMIENTO DATE,
+    TITULO_PROFESIONAL VARCHAR2(30),
+    TIPO_JORNADA VARCHAR2(30),
+    DIRECCION VARCHAR2(200),
+    CIUDAD VARCHAR2(15),
+    TELEFONO_FIJO VARCHAR2(20),
+    TELEFONO_PERSONAL VARCHAR2(20),
+    NIT VARCHAR(50),
+    NUP VARCHAR(50),
+    FACEBOOK VARCHAR2(150),
+    SUELDO_MIN NUMBER(10,2),
+    SUELDO_MAX NUMBER(10,2),
+    DESCRIPCION CLOB,
+    PATH_CV VARCHAR2(150)
 );
 
 CREATE TABLE USUARIO (
@@ -57,7 +73,7 @@ create or replace NONEDITIONABLE PROCEDURE
 is
 begin
     insert into usuario values(SEQUENCE_USUARIO.nextval,correo_electronico, contra );
-    insert into datos_estudiante values(SEQUENCE_ESTUDIANTE.nextval,SEQUENCE_USUARIO.currval , nombre ,correo_electronico );
+    insert into datos_estudiante (idestudiante,idusuario,nombre_estudiante,email) values(SEQUENCE_ESTUDIANTE.nextval,SEQUENCE_USUARIO.currval , nombre ,correo_electronico );
     commit;
 exception
     when others then
@@ -95,6 +111,28 @@ end;
 create or replace procedure listarVacantes (vacantes out var_bolsa_trabajo.cur_vacantes) is
 begin
     open vacantes for select * from perfil;
+end;
+
+create or replace NONEDITIONABLE procedure 
+    actualizarDatosEstudiante(
+        p_idestudiante datos_estudiante.idestudiante%type,
+        p_nombre datos_estudiante.nombre_estudiante%type,p_apellidos datos_estudiante.apellidos%type,p_sexo datos_estudiante.sexo%type,
+        p_fecha datos_estudiante.fecha_nacimiento%type,p_titulo datos_estudiante.titulo_profesional%type,p_jornada datos_estudiante.tipo_jornada%type,
+        p_direccion datos_estudiante.direccion%type,p_ciudad datos_estudiante.ciudad%type,tlf_fijo datos_estudiante.telefono_fijo%type,
+        tlf_personal datos_estudiante.telefono_personal%type,p_nit datos_estudiante.nit%type,p_nup datos_estudiante.nup%type,
+        p_facebook datos_estudiante.facebook%type,p_sueldo_min datos_estudiante.sueldo_min%type,p_sueldo_max datos_estudiante.sueldo_max%type,
+        p_descripcion datos_estudiante.descripcion%type,p_path_cv datos_estudiante.path_cv%type
+    )
+is     
+begin
+    update datos_estudiante set nombre_estudiante = p_nombre, apellidos = p_apellidos, sexo = p_sexo,
+        fecha_nacimiento = p_fecha,titulo_profesional = p_titulo, tipo_jornada = p_jornada,
+        direccion = p_direccion, ciudad = p_ciudad, telefono_fijo = tlf_fijo , telefono_personal = tlf_personal ,
+        nit = p_nit, nup = p_nup, facebook = p_facebook, sueldo_min = p_sueldo_min, sueldo_max = p_sueldo_max,
+        descripcion = p_descripcion, path_cv= p_path_cv where idestudiante = p_idestudiante; 
+exception
+    when others then
+        dbms_output.put_line(sqlcode||' '||sqlerrm);
 end;
 
 --PACKAGE

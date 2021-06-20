@@ -1,10 +1,17 @@
 const { Router } = require("express");
 const router = Router();
+const path = require("path");
 const { query } = require("./db");
+const multer = require("multer");
+const upload = multer({ dest: `C:${path.sep}imagenes` });
+
 const {
   registrarEstudiante,
   registrarEmpresa,
 } = require("./controllers/registerController");
+const {
+  actualizarEstudiante,
+} = require("./controllers/Estudiantes_Controller");
 
 const {
   registrarVacante,
@@ -46,5 +53,11 @@ router.post("/registrar-empresa", registrarEmpresa);
 router.post("/registrar-vacante", registrarVacante);
 
 router.get("/vacantes", listarVacantes);
+
+router.post(
+  "/actualizar-estudiante",
+  upload.single("cv"),
+  actualizarEstudiante
+);
 
 module.exports = router;
