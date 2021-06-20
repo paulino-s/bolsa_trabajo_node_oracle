@@ -5,12 +5,10 @@ const { query } = require("./db");
 const multer = require("multer");
 const upload = multer({ dest: `C:${path.sep}imagenes` });
 
-const {
-  registrarEstudiante,
-  registrarEmpresa,
-} = require("./controllers/registerController");
+const { registrarEmpresa } = require("./controllers/registerController");
 const {
   actualizarEstudiante,
+  registrarEstudiante,
 } = require("./controllers/Estudiantes_Controller");
 
 const {

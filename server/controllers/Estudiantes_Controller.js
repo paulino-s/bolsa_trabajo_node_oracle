@@ -55,6 +55,105 @@ function eliminarEstudiante(params) {
 }
 
 module.exports = {
+  registrarEstudiante: async (req, res) => {
+    try {
+      estudiante = req.body;
+
+      console.log(estudiante);
+
+      let con = await getConnection();
+
+      let result = await con.execute(
+        `BEGIN insertarEstudiante(:Nombre_Estudiante, :Apellido_Estudiante, :Sexo, :Fecha_Nacimiento, :Nacionalidad, :Pasaporte, :NIT, :NUP, :Direccion, :Email, :Departamento, :Municipio, :Telefono_Casa, :Telefono_Celular, :Red_Social); END;`,
+        {
+          Nombre_Estudiante: {
+            dir: oracledb.BIND_IN,
+            val: estudiante.Nombre_Estudiante,
+            type: oracledb.STRING,
+          },
+          Apellido_Estudiante: {
+            dir: oracledb.BIND_IN,
+            val: estudiante.Apellido_Estudiante,
+            type: oracledb.STRING,
+          },
+          Sexo: {
+            dir: oracledb.BIND_IN,
+            val: estudiante.Sexo,
+            type: oracledb.STRING,
+          },
+          Fecha_Nacimiento: {
+            dir: oracledb.BIND_IN,
+            val: estudiante.Fecha_Nacimiento,
+            type: oracledb.DATE,
+          },
+          Nacionalidad: {
+            dir: oracledb.BIND_IN,
+            val: estudiante.Nacionalidad,
+            type: oracledb.STRING,
+          },
+          Pasaporte: {
+            dir: oracledb.BIND_IN,
+            val: estudiante.Pasaporte,
+            type: oracledb.STRING,
+          },
+          NIT: {
+            dir: oracledb.BIND_IN,
+            val: estudiante.NIT,
+            type: oracledb.STRING,
+          },
+          NUP: {
+            dir: oracledb.BIND_IN,
+            val: estudiante.NUP,
+            type: oracledb.STRING,
+          },
+          Direccion: {
+            dir: oracledb.BIND_IN,
+            val: estudiante.Direccion,
+            type: oracledb.STRING,
+          },
+          Email: {
+            dir: oracledb.BIND_IN,
+            val: estudiante.Email,
+            type: oracledb.STRING,
+          },
+          Departamento: {
+            dir: oracledb.BIND_IN,
+            val: estudiante.Departamento,
+            type: oracledb.STRING,
+          },
+          Municipio: {
+            dir: oracledb.BIND_IN,
+            val: estudiante.Municipio,
+            type: oracledb.STRING,
+          },
+          Telefono_Casa: {
+            dir: oracledb.BIND_IN,
+            val: estudiante.Telefono_Casa,
+            type: oracledb.STRING,
+          },
+          Telefono_Celular: {
+            dir: oracledb.BIND_IN,
+            val: estudiante.Telefono_Celular,
+            type: oracledb.STRING,
+          },
+          Red_Social: {
+            dir: oracledb.BIND_IN,
+            val: estudiante.Red_Social,
+            type: oracledb.red,
+          },
+        },
+        {
+          autoCommit: true,
+        }
+      );
+
+      console.log(result.outBinds);
+
+      res.json(result.outBinds);
+    } catch (error) {
+      res.json([{ error: error.message }]);
+    }
+  },
   actualizarEstudiante: async (req, res) => {
     let {
       nombre,
