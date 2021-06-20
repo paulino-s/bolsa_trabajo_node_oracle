@@ -1,5 +1,6 @@
+const { CURSOR } = require("oracledb");
 const oracledb = require("oracledb");
-const { query } = require("../db");
+const { getConnection } = require("../db");
 
 module.exports = {
   registrarEstudiante: async (req, res) => {
@@ -7,21 +8,31 @@ module.exports = {
 
     console.log(name, email, password);
 
-    let result = await query(`BEGIN insertarEstudiante(:n, :e, :p); END;`, {
-      n: { dir: oracledb.BIND_IN, val: name, type: oracledb.STRING },
-      e: {
-        dir: oracledb.BIND_IN,
-        val: email,
-        type: oracledb.STRING,
+    let con = await getConnection();
+
+    let result = await con.execute(
+      `BEGIN insertarEstudiante(:n, :e, :p); END;`,
+      {
+        n: { dir: oracledb.BIND_IN, val: name, type: oracledb.STRING },
+        e: {
+          dir: oracledb.BIND_IN,
+          val: email,
+          type: oracledb.STRING,
+        },
+        p: {
+          dir: oracledb.BIND_IN,
+          val: password,
+          type: oracledb.STRING,
+        },
       },
-      p: {
-        dir: oracledb.BIND_IN,
-        val: password,
-        type: oracledb.STRING,
-      },
-    });
+      {
+        autoCommit: true,
+      }
+    );
 
     console.log(result.outBinds);
+
+    con.release();
 
     res.json(result.outBinds);
   },
@@ -30,7 +41,9 @@ module.exports = {
 
     console.log(nombre, nombre_empresa, email, telefono, password);
 
-    let result = await query(
+    let con = await getConnection();
+
+    let result = await con.execute(
       `
         BEGIN
           insertarEmpresa(:nombre, :empresa, :email, :telefono, :password); 
@@ -42,97 +55,15 @@ module.exports = {
         email,
         telefono,
         password,
-      }
-    );
-
-    console.log(result.outBinds);
-
-    res.json(result.outBinds);
-  },
-  registrarVacante: async (req, res) => {
-    let {
-      titulo,
-      tipo,
-      categoria,
-      direccion,
-      ciudad,
-      sueldo_min,
-      sueldo_max,
-      contacto,
-      descripcion,
-    } = req.body;
-
-    console.log(req.body);
-
-    console.log(
-      titulo,
-      tipo,
-      categoria,
-      direccion,
-      ciudad,
-      sueldo_min,
-      sueldo_max,
-      contacto,
-      descripcion
-    );
-
-    let result = await query(
-      `BEGIN insertarPerfil(:id, :titulo, :tipo, :categoria, :direccion, :ciudad, :sueldo_min, :sueldo_max, :contacto, :descripcion); END;`,
+      },
       {
-        id: {
-          dir: oracledb.BIND_IN,
-          val: 1,
-          type: oracledb.NUMBER,
-        },
-        titulo: {
-          dir: oracledb.BIND_IN,
-          val: titulo,
-          type: oracledb.STRING,
-        },
-        tipo: {
-          dir: oracledb.BIND_IN,
-          val: tipo,
-          type: oracledb.STRING,
-        },
-        categoria: {
-          dir: oracledb.BIND_IN,
-          val: categoria,
-          type: oracledb.STRING,
-        },
-        direccion: {
-          dir: oracledb.BIND_IN,
-          val: direccion,
-          type: oracledb.STRING,
-        },
-        ciudad: {
-          dir: oracledb.BIND_IN,
-          val: ciudad,
-          type: oracledb.DB_TYPE_VARCHAR,
-        },
-        sueldo_min: {
-          dir: oracledb.BIND_IN,
-          val: Number(sueldo_min),
-          type: oracledb.DB_TYPE_NUMBER,
-        },
-        sueldo_max: {
-          dir: oracledb.BIND_IN,
-          val: Number(sueldo_max),
-          type: oracledb.DB_TYPE_NUMBER,
-        },
-        contacto: {
-          dir: oracledb.BIND_IN,
-          val: contacto,
-          type: oracledb.STRING,
-        },
-        descripcion: {
-          dir: oracledb.BIND_IN,
-          val: descripcion,
-          type: oracledb.STRING,
-        },
+        autoCommit: true,
       }
     );
 
     console.log(result.outBinds);
+
+    con.release();
 
     res.json(result.outBinds);
   },

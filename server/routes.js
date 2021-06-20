@@ -4,8 +4,12 @@ const { query } = require("./db");
 const {
   registrarEstudiante,
   registrarEmpresa,
-  registrarVacante,
 } = require("./controllers/registerController");
+
+const {
+  registrarVacante,
+  listarVacantes,
+} = require("./controllers/VacanteController");
 
 router.get("/", (req, res) => {
   res.status(200).json({
@@ -40,5 +44,7 @@ router.post("/registrar-estudiante", registrarEstudiante);
 router.post("/registrar-empresa", registrarEmpresa);
 
 router.post("/registrar-vacante", registrarVacante);
+
+router.get("/vacantes", listarVacantes);
 
 module.exports = router;
