@@ -2,10 +2,10 @@ const { Router } = require("express");
 const router = Router();
 const { query } = require("./db");
 const {
-  registrarEstudiante,
   registrarEmpresa,
   registrarVacante,
 } = require("./controllers/registerController");
+const {registrarEstudiante} = require('./controllers/Estudiantes_Controller')
 
 router.get("/", (req, res) => {
   res.status(200).json({
