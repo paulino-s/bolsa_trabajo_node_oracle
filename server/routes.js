@@ -1,7 +1,11 @@
 const { Router } = require("express");
 const router = Router();
 const { query } = require("./db");
-const { registrarEstudiante } = require("./controllers/registerController");
+const {
+  registrarEstudiante,
+  registrarEmpresa,
+  registrarVacante,
+} = require("./controllers/registerController");
 
 router.get("/", (req, res) => {
   res.status(200).json({
@@ -32,5 +36,9 @@ router.get("/fromoracle", async (req, res) => {
 });
 
 router.post("/registrar-estudiante", registrarEstudiante);
+
+router.post("/registrar-empresa", registrarEmpresa);
+
+router.post("/registrar-vacante", registrarVacante);
 
 module.exports = router;
