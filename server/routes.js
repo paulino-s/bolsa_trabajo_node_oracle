@@ -3,7 +3,16 @@ const router = Router();
 const path = require("path");
 const { query } = require("./db");
 const multer = require("multer");
-const upload = multer({ dest: `C:${path.sep}imagenes` });
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, `C:${path.sep}imagenes`);
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname); // modified here  or user file.mimetype
+  },
+});
+
+const upload = multer({ storage: storage });
 
 const { registrarEmpresa } = require("./controllers/registerController");
 const {
