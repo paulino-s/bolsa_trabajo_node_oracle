@@ -4,6 +4,7 @@ const { query } = require("./db");
 const {
   registrarEstudiante,
   registrarEmpresa,
+  registrarVacante,
 } = require("./controllers/registerController");
 
 router.get("/", (req, res) => {
@@ -37,5 +38,7 @@ router.get("/fromoracle", async (req, res) => {
 router.post("/registrar-estudiante", registrarEstudiante);
 
 router.post("/registrar-empresa", registrarEmpresa);
+
+router.post("/registrar-vacante", registrarVacante);
 
 module.exports = router;
