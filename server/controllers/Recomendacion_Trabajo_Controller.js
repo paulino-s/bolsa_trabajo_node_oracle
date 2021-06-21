@@ -1,27 +1,57 @@
 var recomt = require('../Models/Recomendacion_Trabajo');
-const BD = require('oracledb');
+const oracledb = require("oracledb");
+const { getConnection } = require("../db");
 
-function buscarID(params) {
-    recomt.ID_Recomendacion_Trabajo = params.ID_Recomendacion_Trabajo;
-    //Where
-}
+module.exports = {
+  registrarEmpresa: async (req, res) => {
+    recomt = req.body;
 
-function CrearRecomendacionTrabajo(params) {
-    recomt.ID_Estudiante = params.ID_Estudiante;
-    recomt.Nombre_Empresa = params.Nombre_Empresa;
-    recomt.Sitio_Web = params.Sitio_Web;
-    recomt.Telefono_Empresa = params.Telefono_Empresa;
-    recomt.Email_Empresa = params.Email_Empresa;
-    //Insert
+    console.log(recomt);
 
-}
+    let con = await getConnection();
 
-function EliminarID(params) {
-    recomt.ID_Recomendacion_Trabajo = params.ID_Recomendacion_Trabajo
-    //Delete
-}
+    let result = await con.execute(
+      `
+        BEGIN
+          insertarRecomendacion_Trabajo(:ID_Estudiante, :Nombre_Empresa, :Sitio_Web, :Telefono_Empresa, :Email_Empresa); 
+        END;
+      `,
+      {
+        ID_Estudiante: {
+            dir: oracledb.BIND_IN,
+            val: recomt.ID_Estudiante,
+            type: oracledb.NUMBER,
+          },
+          Nombre_Empresa: {
+            dir: oracledb.BIND_IN,
+            val: recomt.Nombre_Empresa,
+            type: oracledb.STRING,
+          },
+          Sitio_Web: {
+            dir: oracledb.BIND_IN,
+            val: recomt.Sitio_Web,
+            type: oracledb.STRING,
+          },
+          Telefono_Empresa: {
+            dir: oracledb.BIND_IN,
+            val: recomt.Telefono_Empresa,
+            type: oracledb.STRING,
+          },
+          Email_Empresa: {
+            dir: oracledb.BIND_IN,
+            val: recomt.Email_Empresa,
+            type: oracledb.STRING,
+          }
+      },
+      {
+        autoCommit: true,
+      }
+    );
 
-function buscarIDuser(params) {
-    recomt.ID_Estudiante = params.ID_Estudiante;
-    //Where
-}
+    console.log(result.outBinds);
+
+    con.release();
+
+    res.json(result.outBinds);
+  },
+};

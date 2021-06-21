@@ -1,27 +1,52 @@
 var recom = require('../Models/Recomendacion_Personal');
-const BD = require('oracledb');
+const oracledb = require("oracledb");
+const { getConnection } = require("../db");
 
-function buscarID(params) {
-    recom.ID_Recomendacion_Personal = params.ID_Recomendacion_Personal;
-    //Where
-}
+module.exports = {
+  registrarEmpresa: async (req, res) => {
+    recom = req.body;
 
-function crearRecom(params) {
-    recom.ID_Estudiante = params.ID_Estudiante;
-    recom.Categoria_Nombre = params.Categoria_Nombre;
-    recom.Apellido = params.Apellido;
-    recom.Email = params.Email;
+    console.log(recom);
 
-    //Insert
+    let con = await getConnection();
 
-}
+    let result = await con.execute(
+      `
+        BEGIN
+          insertarRecomendacion_Personal(:ID_Estudiante, :Nombre, :Apellido, :Email); 
+        END;
+      `,
+      {
+        ID_Estudiante: {
+            dir: oracledb.BIND_IN,
+            val: recom.ID_Estudiante,
+            type: oracledb.NUMBER,
+          },
+          Nombre: {
+            dir: oracledb.BIND_IN,
+            val: recom.Nombre,
+            type: oracledb.STRING,
+          },
+          Apellido: {
+            dir: oracledb.BIND_IN,
+            val: recom.Apellido,
+            type: oracledb.STRING,
+          },
+          Email: {
+            dir: oracledb.BIND_IN,
+            val: recom.Email,
+            type: oracledb.STRING,
+          }
+      },
+      {
+        autoCommit: true,
+      }
+    );
 
-function eliminarID(params) {
-    recom.ID_Recomendacion_Personal = params.ID_Recomendacion_Personal;
-    //Delete
-}
+    console.log(result.outBinds);
 
-function buscarIDuser(params) {
-    recom.ID_Estudiante
-    //where
-}
+    con.release();
+
+    res.json(result.outBinds);
+  },
+};

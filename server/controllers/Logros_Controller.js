@@ -1,28 +1,52 @@
 var logro = require('../Models/Logros');
-const BD = require('oracledb');
+const oracledb = require("oracledb");
+const { getConnection } = require("../db");
 
-function buscarID(params) {
-    logro.ID_Logro = params.ID_Logro;
-    //Programar Where
-}
+module.exports = {
+  registrarEmpresa: async (req, res) => {
+    logro = req.body;
 
-function crearLogro(params) {
-    logro.ID_Estudiante = params.ID_Estudiante;
-    logro.Titulo_Logro = params.Titulo_Logro;
-    logro.Fecha_Logros = params.Fecha_Logros;
-    logro.Comentarios_Logro = params.Comentarios_Logro;
+    console.log(logro);
 
-    //Programar Insert
+    let con = await getConnection();
 
-}
+    let result = await con.execute(
+      `
+        BEGIN
+          insertarLogros(:ID_Estudiante, :Titulo_Logro, :Fecha_Logro, :Comentarios_Logro); 
+        END;
+      `,
+      {
+        ID_Estudiante: {
+            dir: oracledb.BIND_IN,
+            val: logro.ID_Estudiante,
+            type: oracledb.NUMBER,
+          },
+          Titulo_Logro: {
+            dir: oracledb.BIND_IN,
+            val: logro.Titulo_Logro,
+            type: oracledb.STRING,
+          },
+          Fecha_Logro: {
+            dir: oracledb.BIND_IN,
+            val: logro.Fecha_Logro,
+            type: oracledb.STRING,
+          },
+          Comentarios_Logro: {
+            dir: oracledb.BIND_IN,
+            val: logro.Comentarios_Logro,
+            type: oracledb.STRING,
+          }
+      },
+      {
+        autoCommit: true,
+      }
+    );
 
-function elminarID(params) {
-    logro.ID_Logro = params;
+    console.log(result.outBinds);
 
-    //Programar Delete
-}
+    con.release();
 
-function buscarIDuser(params) {
-    logro.ID_Estudiante = params;
-    //Programar Where    
-}
+    res.json(result.outBinds);
+  },
+};
