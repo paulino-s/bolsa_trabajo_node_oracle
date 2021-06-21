@@ -1,35 +1,57 @@
 var diploma = require('../Models/Diplomas_Academicos');
-const BD = require('oracledb');
+const oracledb = require("oracledb");
+const { getConnection } = require("../db");
 
-function buscarID(params) {
-    diploma.ID_Diploma = params.ID_Diploma;
-    //Where
-}
+module.exports = {
+  registrarEmpresa: async (req, res) => {
+    diploma = req.body;
 
-function crearDiploma(params) {
-    diploma.ID_Estudiante = params.ID_Estudiante;
-    diploma.Titulo = params.Titulo;
-    diploma.Nombre_InsDiploma = params.Nombre_InsDiploma;
-    diploma.Archivo_Diploma = params.Archivo_Diploma;
-    diploma.Fecha = params.Fecha;
-    //Insert
-}
+    console.log(diploma);
 
-function actualizarDiploma(params) {
-    diploma.ID_Estudiante = params.ID_Estudiante;
-    diploma.Titulo = params.Titulo;
-    diploma.Nombre_InsDiploma = params.Nombre_InsDiploma;
-    diploma.Archivo_Diploma = params.Archivo_Diploma;
-    diploma.Fecha = params.Fecha;
-    //Update
-}
+    let con = await getConnection();
 
-function eliminarID(params) {
-    diploma.ID_Diploma = params.ID_Diploma;
-    //Delete
-}
+    let result = await con.execute(
+      `
+        BEGIN
+          insertardiploma(:ID_Estuiante, :Titulo, :Nombre_InsDiploma, :Archivo_Diploma, :Fecha); 
+        END;
+      `,
+      {
+        ID_Estudiante: {
+            dir: oracledb.BIND_IN,
+            val: diploma.ID_Estudiante,
+            type: oracledb.NUMBER,
+          },
+          Titulo: {
+            dir: oracledb.BIND_IN,
+            val: diploma.Titulo,
+            type: oracledb.STRING,
+          },
+          Nombre_InsDiploma: {
+            dir: oracledb.BIND_IN,
+            val: diploma.Nombre_InsDiploma,
+            type: oracledb.STRING,
+          },
+          Archivo_Diploma: {
+            dir: oracledb.BIND_IN,
+            val: diploma.Archivo_Diploma,
+            type: oracledb.STRING,
+          },
+          Fecha: {
+            dir: oracledb.BIND_IN,
+            val: diploma.Fecha,
+            type: oracledb.DATE,
+          }
+      },
+      {
+        autoCommit: true,
+      }
+    );
 
-function BuscarIDuser(params) {
-    diploma.ID_Estudiante = params.ID_Estudiante;
-    //Where
-}
+    console.log(result.outBinds);
+
+    con.release();
+
+    res.json(result.outBinds);
+  },
+};

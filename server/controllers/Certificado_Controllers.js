@@ -1,26 +1,57 @@
-var Certi = require("../Models/Certificaciones");
-const BD = require('oracledb');
+var certificaciones = require('../Models/Certificaciones');
+const oracledb = require("oracledb");
+const { getConnection } = require("../db");
 
-function buscarID(params) {
-    Certi.ID_Certificado = params.ID_Certificado;
-    //Where
-}
+module.exports = {
+  registrarEmpresa: async (req, res) => {
+    certificaciones = req.body;
 
-function crearCertificacion(params) {
-    Certi.ID_Estudiante = params.ID_Estudiante;
-    Certi.Titulo_Certificado = params.Titulo_Certificado;
-    Certi.Institucion_Certificado = params.Institucion_Certificado;
-    Certi.Archivo_Certificado = params.Archivo_Certificado;
-    Certi.Fecha_Certificado = params.Fecha_Certificado;
-    //Insert
-}
+    console.log(certificaciones);
 
-function eliminarID(params) {
-    Certi.ID_Certificado = params.ID_Certificado;
-    //Delete
-}
+    let con = await getConnection();
 
-function BuscarIDuser(params) {
-    Certi.ID_Estudiante = params.ID_Estudiante;
-    //Where
-}
+    let result = await con.execute(
+      `
+        BEGIN
+          insertarcertificaciones(:ID_Estuiante, :Titulo_Certificado, :Institucion_Certificado, :Archivo_Certificado, :Fecha_Certificado); 
+        END;
+      `,
+      {
+        ID_Estudiante: {
+            dir: oracledb.BIND_IN,
+            val: certificaciones.ID_Estudiante,
+            type: oracledb.NUMBER,
+          },
+          Titulo_Certificado: {
+            dir: oracledb.BIND_IN,
+            val: certificaciones.Titulo_Certificado,
+            type: oracledb.STRING,
+          },
+          Institucion_Certificado: {
+            dir: oracledb.BIND_IN,
+            val: certificaciones.Institucion_Certificado,
+            type: oracledb.STRING,
+          },
+          Archivo_Certificado: {
+            dir: oracledb.BIND_IN,
+            val: certificaciones.Archivo_Certificado,
+            type: oracledb.STRING,
+          },
+          Fecha_Certificado: {
+            dir: oracledb.BIND_IN,
+            val: certificaciones.Fecha_Certificado,
+            type: oracledb.DATE,
+          }
+      },
+      {
+        autoCommit: true,
+      }
+    );
+
+    console.log(result.outBinds);
+
+    con.release();
+
+    res.json(result.outBinds);
+  },
+};
