@@ -139,7 +139,7 @@ const PublicarEmpleo = (props) => {
                           </select>
                         </div>
                       </div>
-                      <div className="col-xl-4">
+                                        <div className="col-xl-4">
                                             <div className="submit-field">
                                                 <h5>Dirección Empresa:</h5>
                                                 <div className="input-with-icon">
@@ -150,13 +150,13 @@ const PublicarEmpleo = (props) => {
                                                 </div>
                                             </div>
                                         </div>
-                      <div className="col-xl-4">
+                                         <div className="col-xl-4">
                                             <div className="submit-field">
                                                 <h5>Experiencia:</h5>
                                                 <input name="experiencia_laboral" type="number" className="with-border" required/>
                                             </div>
                                         </div>
-                      <div className="col-xl-4">
+                                         <div className="col-xl-4">
                                             <div className="submit-field">
                                                 <h5>Salario Ofertado:</h5>
                                                 <div className="row">

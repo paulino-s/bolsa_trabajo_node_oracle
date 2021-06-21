@@ -304,6 +304,407 @@ const PublicarCandidato = (props) => {
                           </div>
                         </div>
                       </div>
+                      <div className="col-xl-12">
+                             
+                              <p>Experiencia Laboral:</p>
+                        
+                            
+                            </div>
+
+                        
+                    <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Cargo Desempeñado</h5>
+                       <input
+                            name="cargo"
+                            type="text"
+                            className="with-border"/>
+                        </div>
+                    </div>
+                    <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Nombre Trabajo Anterior</h5>
+                       <input name="trabajo_anterior" type="text"className="with-border"/>
+                        </div>
+                    </div>
+                    <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Tiempo Laborando</h5>
+                       <input name="tiempo_laborando" type="number"className="with-border" placeholder="Expresar Cantidad en Meses"/>
+                        </div>
+                    </div>
+                    <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Nombre Empresa</h5>
+                       <input name="nombre_empresa" type="text"className="with-border"/>
+                        </div>
+                    </div>
+                    <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Telefono Empresa</h5>
+                       <input name="telefono_empresa" type="number"className="with-border"/>
+                        </div>
+                    </div>
+
+               <div className="col-xl-12">
+                             
+                     <p>Conocimientos Academicos:</p>
+                       
+                           
+               </div>
+
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Titulo del Diploma</h5>
+                       <input name="titulo_diploma" type="text"className="with-border"/>
+                        </div>
+               </div>
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Nombre Diploma</h5>
+                       <input name="nombre_diploma" type="text"className="with-border"/>
+                        </div>
+               </div>
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Fecha de Diploma Recibido:</h5>
+                          <input
+                            name="fecha_diploma"
+                            type="date"
+                            className="with-border"
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      <div className="col-xl-12">
+                        <div className="submit-field">
+                         
+                          <div className="uploadButton margin-top-30">
+                            <input
+                              className="uploadButton-input"
+                              type="file"
+                              accept="image/*, application/pdf"
+                              id="upload"
+                              multiple
+                            />
+                            <label
+                              className="uploadButton-button ripple-effect"
+                              htmlFor="upload"
+                            >
+                              Archivo del Diploma
+                            </label>
+                            <span className="uploadButton-file-name">
+                              Subir en formato PDF del Diploma
+                            </span>
+                          </div>
+
+                         
+                        </div>
+                      </div>
+                      
+
+                          <div className="col-xl-12">
+                             
+                             <p>Certificaciones:</p>
+                               
+                                   
+                       </div>
+                       <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Tipo de Certificado</h5>
+                          <select
+                            name="tipo_certificado"
+                            data-size="7"
+                            title="tipo_de_certificado"
+                            required
+                          >
+                            <option value="tp1">Tipo 1</option>
+                            <option value="tp2">Tipo 2</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Titulo del Certificado</h5>
+                       <input name="titulo_certificado" type="text"className="with-border"/>
+                        </div>
+               </div>
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Institucion Que Otorga</h5>
+                       <input name="titulo_diploma" type="text"className="with-border"/>
+                        </div>
+               </div>
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Fecha de Certificado Recibido:</h5>
+                          <input
+                            name="fecha_certificado"
+                            type="date"
+                            className="with-border"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div className="col-xl-12">
+                        <div className="submit-field">
+                         
+                          <div className="uploadButton margin-top-30">
+                            <input
+                              className="uploadButton-input"
+                              type="file"
+                              accept="image/*, application/pdf"
+                              id="upload"
+                              multiple
+                            />
+                            <label
+                              className="uploadButton-button ripple-effect"
+                              htmlFor="upload"
+                            >
+                              Archivo del Certificado
+                            </label>
+                            <span className="uploadButton-file-name">
+                              Subir en formato PDF del certificado
+                            </span>
+                          </div>
+
+                         
+                        </div>
+                      </div>
+                      
+
+
+                          <div className="col-xl-12">
+                             
+                             <p>Logros:</p>
+                               
+                                   
+                       </div>
+                       <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Titulo de Logro</h5>
+                       <input name="titulo_logro" type="text"className="with-border"/>
+                        </div>
+                        </div>
+                        <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Fecha de Logro Recibido:</h5>
+                          <input
+                            name="fecha_logro"
+                            type="date"
+                            className="with-border"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div className="col-xl-12">
+                        <div className="submit-field">
+                          <h5>Comentarios del Logro:</h5>
+                          <textarea
+                            name="descripcion_logro"
+                            cols="30"
+                            rows="5"
+                            className="with-border"
+                            required
+                          ></textarea>
+                         
+                        </div>
+                      </div>
+
+                      <div className="col-xl-12">
+                             
+                             <p>Recomendaciones Personales:</p>
+                               
+                                   
+                       </div>
+        
+                       <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Categoria Nombre</h5>
+                       <input name="categoria_nombre" type="text"className="with-border"/>
+                        </div>
+               </div>
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Apellidos</h5>
+                       <input name="apellidos_recomenacions" type="text"className="with-border"/>
+                        </div>
+               </div>
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Correo Electrónico:</h5>
+                          <input
+                            name="email_recomendacion"
+                            type="text"
+                            className="with-border"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div className="col-xl-12">
+                             
+                             <p>Recomendaciones de Trabajo:</p>
+                               
+                                   
+                       </div>
+        
+                       <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Nombre de la Empresa</h5>
+                       <input name="nombre_empresar" type="text"className="with-border"/>
+                        </div>
+               </div>
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Sitio Web</h5>
+                       <input name="sitioweb_empresar" type="text"className="with-border"/>
+                        </div>
+               </div>
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Telefono Empresa</h5>
+                       <input name="telefono_empresar" type="number"className="with-border"/>
+                        </div>
+               </div>
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Correo Electrónico:</h5>
+                          <input
+                            name="email_empresar"
+                            type="text"
+                            className="with-border"
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      <div className="col-xl-12">
+                             
+                             <p>Libros:</p>
+                               
+                                   
+                       </div>
+
+                       <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Titulo del Libro</h5>
+                       <input name="sitioweb_empresar" type="text"className="with-border"/>
+                        </div>
+               </div>
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Edicion del Libro</h5>
+                       <input name="edicion_libro" type="number"className="with-border"/>
+                        </div>
+               </div>
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Nombre del Articulo</h5>
+                       <input name="nombre_articulo" type="text"className="with-border"/>
+                        </div>
+               </div>
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Web Editorial</h5>
+                       <input name="web_publicacion" type="text"className="with-border"/>
+                        </div>
+               </div>
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>ISBM</h5>
+                       <input name="isbm" type="text"className="with-border"/>
+                        </div>
+               </div>
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Fecha de Publicacion:</h5>
+                          <input
+                            name="fecha_libro"
+                            type="date"
+                            className="with-border"
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      <div className="col-xl-12">
+                             
+                             <p>Congresos:</p>
+                               
+                                   
+                       </div>
+                       <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Titulo Congresos</h5>
+                       <input name="titulo_congreso" type="text"className="with-border"/>
+                        </div>
+               </div>
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Lugar del Congreso:</h5>
+                          <div className="input-with-icon">
+                            <div id="autocomplete-container">
+                              <input
+                                name="Lugar_congreso"
+                                id="autocomplete-input"
+                                className="with-border"
+                                type="text"
+                                placeholder="Lugar del congreso"
+                                
+                              />
+                            </div>
+                            <i className="icon-material-outline-location-on"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Fecha de Inicio del Congreso:</h5>
+                          <input
+                            name="fecha_congreso"
+                            type="date"
+                            className="with-border"
+                            
+                          />
+                        </div>
+                      </div>
+                      <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Talleres</h5>
+                       <input name="talleres" type="text"className="with-border"/>
+                        </div>
+               </div>
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Foros</h5>
+                       <input name="foros" type="text"className="with-border"/>
+                        </div>
+               </div>
+               <div className="col-xl-4">
+                        <div className="submit-field">
+                          <h5>Nombre del Encargado del Evento</h5>
+                       <input name="encargado_evento" type="text"className="with-border"/>
+                        </div>
+               </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                       <div className="col-xl-12">
                         <div className="submit-field">
