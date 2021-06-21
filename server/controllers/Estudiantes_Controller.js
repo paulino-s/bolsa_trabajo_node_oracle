@@ -2,7 +2,7 @@ var estudiante = require("../Models/Estudiante");
 const oracledb = require("oracledb");
 const { getConnection } = require("../db");
 const path = require("path");
-
+/*
 function buscarID(params) {
   estudiante.ID_Estudiante = params.ID_Estudiante;
   //Where
@@ -28,7 +28,7 @@ function crearEstudiante(params) {
   //Insert
 }
 
-/*
+
 function actualizarEstudiante(params) {
   estudiante.Nombre_Estudiante = params.Nombre_Estudiante;
   estudiante.Apellido_Estudiante = params.Apellido_Estudiante;
@@ -47,13 +47,13 @@ function actualizarEstudiante(params) {
   estudiante.Red_Social = params.Red_Social;
   //Update
 }
-*/
+
 
 function eliminarEstudiante(params) {
   estudiante.ID_Estudiante = params.ID_Estudiante;
   //Delete
 }
-
+*/
 module.exports = {
   registrarEstudiante: async (req, res) => {
     try {

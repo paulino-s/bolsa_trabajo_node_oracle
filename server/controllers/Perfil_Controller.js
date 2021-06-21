@@ -1,37 +1,67 @@
-var Perfil = require('../Models/Perfil');
-const BD = require('oracledb');
+var perfil = require('../Models/Perfil');
+const oracledb = require("oracledb");
+const { getConnection } = require("../db");
 
-function buscarID(params) {
-    Perfil.ID_Perfil = params.ID_Perfil;
-    //Where
-}
+module.exports = {
+  registrarEmpresa: async (req, res) => {
+    perfil = req.body;
 
-function crearPerfil(params) {
-    Perfil.ID_Estudiante = params.ID_Estudiante;
-    Perfil.Titulo_Info = params.Titulo_Info;
-    Perfil.Perfil_Academico = params.Perfil_Academico;
-    Perfil.Habilidades_Perfil = params.Habilidades_Perfil;
-    Perfil.Experiencia_Laboral = params.Experiencia_Laboral;
-    Perfil.Rango_Salarial = params.Rango_Salarial;
-    Perfil.Direccion_Trabajo = params.Direccion_Trabajo;
-    //Insert
-}
+    console.log(perfil);
 
-function Actualizar(params) {
-    Perfil.ID_Estudiante = params.ID_Estudiante;
-    Perfil.Titulo_Info = params.Titulo_Info;
-    Perfil.Perfil_Academico = params.Perfil_Academico;
-    Perfil.Habilidades_Perfil = params.Habilidades_Perfil;
-    Perfil.Experiencia_Laboral = params.Experiencia_Laboral;
-    Perfil.Rango_Salarial = params.Rango_Salarial;
-    Perfil.Direccion_Trabajo = params.Direccion_Trabajo;
-    //Update
-}
-function eliminarID(params) {
-    Perfil.ID_Perfil = params.ID_Perfil;
-    //Progrmar Delete
-}
-function buscarIDuser(params) {
-    Perfil.ID_Estudiante = params.ID_Estudiante;
-    //Where
-}
+    let con = await getConnection();
+
+    let result = await con.execute(
+      `
+        BEGIN
+          insertarPerfil(:ID_Estudiante, :Titulo_Info, :Perfil_Academico, :Habilidades_Perfil, :Experiencia_Laboral, :Rango_Salarial, :Direccion_Trabajo); 
+        END;
+      `,
+      {
+        ID_Estudiante: {
+            dir: oracledb.BIND_IN,
+            val: perfil.ID_Estudiante,
+            type: oracledb.NUMBER,
+          },
+          Titulo_Info: {
+            dir: oracledb.BIND_IN,
+            val: perfil.Titulo_Info,
+            type: oracledb.STRING,
+          },
+          Perfil_Academico: {
+            dir: oracledb.BIND_IN,
+            val: perfil.Perfil_Academico,
+            type: oracledb.STRING,
+          },
+          Habilidades_Perfil: {
+            dir: oracledb.BIND_IN,
+            val: perfil.Habilidades_Perfil,
+            type: oracledb.STRING,
+          },
+          Experiencia_Laboral: {
+            dir: oracledb.BIND_IN,
+            val: perfil.Experiencia_Laboral,
+            type: oracledb.STRING,
+          },
+          Rango_Salarial: {
+            dir: oracledb.BIND_IN,
+            val: perfil.Rango_Salarial,
+            type: oracledb.STRING,
+          },
+          Direccion_Trabajo: {
+            dir: oracledb.BIND_IN,
+            val: perfil.Direccion_Trabajo,
+            type: oracledb.STRING,
+          }
+      },
+      {
+        autoCommit: true,
+      }
+    );
+
+    console.log(result.outBinds);
+
+    con.release();
+
+    res.json(result.outBinds);
+  },
+};
