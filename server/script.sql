@@ -108,9 +108,16 @@ exception
         rollback;
 end;
 
-create or replace procedure listarVacantes (vacantes out var_bolsa_trabajo.cur_vacantes) is
+create or replace NONEDITIONABLE procedure vacantes(c_vacantes out var_bolsa_trabajo.cur_ofertas)
+is
 begin
-    open vacantes for select * from perfil;
+    open c_vacantes for select e.idempresa,p.titulo,p.tipo,p.rubro,p.direccion,p.ciudad,p.sueldo_min,
+        p.sueldo_max,e.nombre,e.nombre_completo,p.descripcion,p.habilidades
+            from perfil p inner join registrar_empresas e on p.idempresa = e.idempresa;
+exception
+    when others then
+        dbms_output.put_line(sqlcode||' '||sqlerrm);
+        rollback;
 end;
 
 create or replace NONEDITIONABLE procedure 
@@ -137,11 +144,25 @@ end;
 
 --PACKAGE
 
-create or replace package var_bolsa_trabajo
+create or replace NONEDITIONABLE package var_bolsa_trabajo
 as
     type cur_vacantes is ref cursor return perfil%rowtype;
+    type ofe_emp is record(
+        id registrar_empresas.idempresa%type,
+        vacante perfil.titulo%type,
+        tipo perfil.tipo%type,
+        rubro perfil.rubro%type,
+        ubicacion perfil.direccion%type,
+        ciudad perfil.ciudad%type,
+        sueldoMin perfil.sueldo_min%type,
+        sueldoMax perfil.sueldo_max%type,
+        empresa registrar_empresas.nombre%TYPE,
+        contacto registrar_empresas.nombre_completo%type,
+        descripcion perfil.descripcion%type,
+        habilidades perfil.habilidades%type
+    );
+    type cur_ofertas is ref cursor return ofe_emp;
 end var_bolsa_trabajo;
-
 
 
 

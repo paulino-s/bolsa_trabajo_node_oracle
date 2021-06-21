@@ -68,16 +68,14 @@ class App extends Component {
       .then(res => {
         const candidatos = res.data;
         this.setState({ candidatos });
-      })
-//Muestra informacion de empresas    
-    axios.get(`http://18.219.47.222/apis/bolsadetrabajo/empresas.php`)
-      .then(res => {
-        const empresas = res.data;
-        this.setState({ empresas });
-      })
-
-    
-  }*/
+      })*/
+    //Muestra informacion de empresas
+    axios.get(`http://localhost:3001/vacantes`).then((res) => {
+      const empresas = res.data;
+      console.log("COMPONENTDIDMOUNT");
+      console.log(empresas);
+      this.setState({ empresas });
+    });
   }
 
   componentDidUpdate() {
@@ -199,12 +197,10 @@ class App extends Component {
         console.log(res.data);
       });
     //Mostrar empresas
-    /*axios
-      .get(`http://18.219.47.222/apis/bolsadetrabajo/empresas.php`)
-      .then((res) => {
-        const candidatos = res.data;
-        this.setState({ candidatos });
-      });*/
+    axios.get(`http://localhost:3001/vacantes`).then((res) => {
+      const candidatos = res.data;
+      this.setState({ candidatos });
+    });
 
     window.scrollTo(0, 0);
     alert("OFERTA AGREGADA CON ÉXITO!!!");

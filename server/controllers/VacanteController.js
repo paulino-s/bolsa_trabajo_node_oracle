@@ -39,7 +39,7 @@ module.exports = {
         {
           id: {
             dir: oracledb.BIND_IN,
-            val: 1,
+            val: 23,
             type: oracledb.NUMBER,
           },
           vacante: {
@@ -111,7 +111,7 @@ module.exports = {
       let result = await con.execute(
         `
       BEGIN
-        listarVacantes(:cursor);
+        vacantes(:cursor);
       END;
     `,
         {
@@ -128,7 +128,24 @@ module.exports = {
       console.log(JSON.stringify(result, 2, null));
 
       let rs = result.outBinds.cursor;
-      let rows = await rs.getRows();
+      let rows = [];
+
+      while ((row = await rs.getRow())) {
+        rows.push({
+          id: row[0],
+          vacante: row[1],
+          tipoVacante: row[2],
+          categoria: row[3],
+          ubicacion: row[4],
+          ciudad: row[5],
+          sueldoMin: row[6],
+          sueldoMax: row[7],
+          empresa: row[8],
+          contacto: row[9],
+          descripcion: row[10],
+          habilidades: row[11],
+        });
+      }
 
       console.log(rows);
 
