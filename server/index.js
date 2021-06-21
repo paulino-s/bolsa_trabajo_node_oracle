@@ -3,12 +3,13 @@ const morgan = require("morgan");
 const cors = require("cors");
 const app = express();
 
-const router = require("./routes.js");
+const router = require("./routes");
 
 /*CONFIGURACIONES*/
 
-app.set("port", 3000);
+app.set("port", 3001);
 
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

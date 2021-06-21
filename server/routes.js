@@ -14,16 +14,15 @@ var storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const { registrarEmpresa } = require("./controllers/registerController");
 const {
   actualizarEstudiante,
-  registrarEstudiante,
 } = require("./controllers/Estudiantes_Controller");
 
 const {
   registrarVacante,
   listarVacantes,
 } = require("./controllers/VacanteController");
+const { registrar } = require("./controllers/registerController");
 
 router.get("/", (req, res) => {
   res.status(200).json({
@@ -53,9 +52,7 @@ router.get("/fromoracle", async (req, res) => {
   res.json({ login });
 });
 
-router.post("/registrar-estudiante", registrarEstudiante);
-
-router.post("/registrar-empresa", registrarEmpresa);
+router.post("/registro", registrar);
 
 router.post("/registrar-vacante", registrarVacante);
 

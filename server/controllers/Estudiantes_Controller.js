@@ -59,87 +59,29 @@ module.exports = {
     try {
       estudiante = req.body;
 
+      let { password } = req.body;
+
       console.log(estudiante);
 
       let con = await getConnection();
 
       let result = await con.execute(
-        `BEGIN insertarEstudiante(:Nombre_Estudiante, :Apellido_Estudiante, :Sexo, :Fecha_Nacimiento, :Nacionalidad, :Pasaporte, :NIT, :NUP, :Direccion, :Email, :Departamento, :Municipio, :Telefono_Casa, :Telefono_Celular, :Red_Social); END;`,
+        `BEGIN insertarEstudiante(:Nombre_Estudiante, :Email, :Pass); END;`,
         {
           Nombre_Estudiante: {
             dir: oracledb.BIND_IN,
-            val: estudiante.Nombre_Estudiante,
-            type: oracledb.STRING,
-          },
-          Apellido_Estudiante: {
-            dir: oracledb.BIND_IN,
-            val: estudiante.Apellido_Estudiante,
-            type: oracledb.STRING,
-          },
-          Sexo: {
-            dir: oracledb.BIND_IN,
-            val: estudiante.Sexo,
-            type: oracledb.STRING,
-          },
-          Fecha_Nacimiento: {
-            dir: oracledb.BIND_IN,
-            val: estudiante.Fecha_Nacimiento,
-            type: oracledb.DATE,
-          },
-          Nacionalidad: {
-            dir: oracledb.BIND_IN,
-            val: estudiante.Nacionalidad,
-            type: oracledb.STRING,
-          },
-          Pasaporte: {
-            dir: oracledb.BIND_IN,
-            val: estudiante.Pasaporte,
-            type: oracledb.STRING,
-          },
-          NIT: {
-            dir: oracledb.BIND_IN,
-            val: estudiante.NIT,
-            type: oracledb.STRING,
-          },
-          NUP: {
-            dir: oracledb.BIND_IN,
-            val: estudiante.NUP,
-            type: oracledb.STRING,
-          },
-          Direccion: {
-            dir: oracledb.BIND_IN,
-            val: estudiante.Direccion,
+            val: estudiante.nombre,
             type: oracledb.STRING,
           },
           Email: {
             dir: oracledb.BIND_IN,
-            val: estudiante.Email,
+            val: estudiante.emailaddress,
             type: oracledb.STRING,
           },
-          Departamento: {
+          Pass: {
             dir: oracledb.BIND_IN,
-            val: estudiante.Departamento,
+            val: password,
             type: oracledb.STRING,
-          },
-          Municipio: {
-            dir: oracledb.BIND_IN,
-            val: estudiante.Municipio,
-            type: oracledb.STRING,
-          },
-          Telefono_Casa: {
-            dir: oracledb.BIND_IN,
-            val: estudiante.Telefono_Casa,
-            type: oracledb.STRING,
-          },
-          Telefono_Celular: {
-            dir: oracledb.BIND_IN,
-            val: estudiante.Telefono_Celular,
-            type: oracledb.STRING,
-          },
-          Red_Social: {
-            dir: oracledb.BIND_IN,
-            val: estudiante.Red_Social,
-            type: oracledb.red,
           },
         },
         {
@@ -149,7 +91,7 @@ module.exports = {
 
       console.log(result.outBinds);
 
-      res.json(result.outBinds);
+      res.json({ data: "successfully registered user" });
     } catch (error) {
       res.json([{ error: error.message }]);
     }

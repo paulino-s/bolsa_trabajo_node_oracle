@@ -1,37 +1,18 @@
 const { CURSOR } = require("oracledb");
 const oracledb = require("oracledb");
 const { getConnection } = require("../db");
+const { registrarEstudiante } = require("./Estudiantes_Controller");
+const { registrarEmpresa } = require("./Empresa_Controller");
 
 module.exports = {
-  registrarEmpresa: async (req, res) => {
-    let { nombre, nombre_empresa, email, telefono, password } = req.body;
+  registrar: (req, res) => {
+    let { tipo } = req.body;
+    console.log(`tipo ${tipo}`);
 
-    console.log(nombre, nombre_empresa, email, telefono, password);
-
-    let con = await getConnection();
-
-    let result = await con.execute(
-      `
-        BEGIN
-          insertarEmpresa(:nombre, :empresa, :email, :telefono, :password); 
-        END;
-      `,
-      {
-        nombre,
-        empresa: nombre_empresa,
-        email,
-        telefono,
-        password,
-      },
-      {
-        autoCommit: true,
-      }
-    );
-
-    console.log(result.outBinds);
-
-    con.release();
-
-    res.json(result.outBinds);
+    if (tipo === "empresa") {
+      registrarEmpresa(req, res);
+    } else {
+      registrarEstudiante(req, res);
+    }
   },
 };

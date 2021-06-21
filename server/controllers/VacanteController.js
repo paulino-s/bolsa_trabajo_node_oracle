@@ -3,100 +3,106 @@ const { getConnection } = require("../db");
 
 module.exports = {
   registrarVacante: async (req, res) => {
-    let {
-      titulo,
-      tipo,
-      categoria,
-      direccion,
-      ciudad,
-      sueldo_min,
-      sueldo_max,
-      contacto,
-      descripcion,
-    } = req.body;
+    try {
+      let {
+        vacante,
+        tipoVacante,
+        rubro,
+        direccion_empresa,
+        ciudad,
+        salarioMin,
+        salarioMax,
+        habilidades,
+        descripcion,
+      } = req.body;
 
-    console.log(req.body);
+      console.log(req.body);
 
-    console.log(
-      titulo,
-      tipo,
-      categoria,
-      direccion,
-      ciudad,
-      sueldo_min,
-      sueldo_max,
-      contacto,
-      descripcion
-    );
+      console.log(
+        vacante,
+        tipoVacante,
+        rubro,
+        direccion_empresa,
+        ciudad,
+        salarioMin,
+        salarioMax,
+        habilidades,
+        descripcion
+      );
 
-    let con = await getConnection();
+      let con = await getConnection();
 
-    let result = await con.execute(
-      ` BEGIN
-            insertarPerfil(:id, :titulo, :tipo, :categoria, :direccion, :ciudad, :sueldo_min, :sueldo_max, :contacto, :descripcion); 
-        END;`,
-      {
-        id: {
-          dir: oracledb.BIND_IN,
-          val: 1,
-          type: oracledb.NUMBER,
+      let result = await con.execute(
+        ` BEGIN
+              insertarPerfil(:id, :vacante, :tipoVacante, :rubro, :direccion_empresa, :ciudad, :salarioMin, :salarioMax, :habilidades, :descripcion); 
+          END;`,
+        {
+          id: {
+            dir: oracledb.BIND_IN,
+            val: 1,
+            type: oracledb.NUMBER,
+          },
+          vacante: {
+            dir: oracledb.BIND_IN,
+            val: vacante,
+            type: oracledb.STRING,
+          },
+          tipoVacante: {
+            dir: oracledb.BIND_IN,
+            val: tipoVacante,
+            type: oracledb.STRING,
+          },
+          rubro: {
+            dir: oracledb.BIND_IN,
+            val: rubro,
+            type: oracledb.STRING,
+          },
+          direccion_empresa: {
+            dir: oracledb.BIND_IN,
+            val: direccion_empresa,
+            type: oracledb.STRING,
+          },
+          ciudad: {
+            dir: oracledb.BIND_IN,
+            val: ciudad,
+            type: oracledb.DB_TYPE_VARCHAR,
+          },
+          salarioMin: {
+            dir: oracledb.BIND_IN,
+            val: Number(salarioMin),
+            type: oracledb.DB_TYPE_NUMBER,
+          },
+          salarioMax: {
+            dir: oracledb.BIND_IN,
+            val: Number(salarioMax),
+            type: oracledb.DB_TYPE_NUMBER,
+          },
+          habilidades: {
+            dir: oracledb.BIND_IN,
+            val: habilidades,
+            type: oracledb.STRING,
+          },
+          descripcion: {
+            dir: oracledb.BIND_IN,
+            val: descripcion,
+            type: oracledb.STRING,
+          },
         },
-        titulo: {
-          dir: oracledb.BIND_IN,
-          val: titulo,
-          type: oracledb.STRING,
-        },
-        tipo: {
-          dir: oracledb.BIND_IN,
-          val: tipo,
-          type: oracledb.STRING,
-        },
-        categoria: {
-          dir: oracledb.BIND_IN,
-          val: categoria,
-          type: oracledb.STRING,
-        },
-        direccion: {
-          dir: oracledb.BIND_IN,
-          val: direccion,
-          type: oracledb.STRING,
-        },
-        ciudad: {
-          dir: oracledb.BIND_IN,
-          val: ciudad,
-          type: oracledb.DB_TYPE_VARCHAR,
-        },
-        sueldo_min: {
-          dir: oracledb.BIND_IN,
-          val: Number(sueldo_min),
-          type: oracledb.DB_TYPE_NUMBER,
-        },
-        sueldo_max: {
-          dir: oracledb.BIND_IN,
-          val: Number(sueldo_max),
-          type: oracledb.DB_TYPE_NUMBER,
-        },
-        contacto: {
-          dir: oracledb.BIND_IN,
-          val: contacto,
-          type: oracledb.STRING,
-        },
-        descripcion: {
-          dir: oracledb.BIND_IN,
-          val: descripcion,
-          type: oracledb.STRING,
-        },
-      },
-      {
-        autoCommit: true,
-      }
-    );
+        {
+          autoCommit: true,
+        }
+      );
 
-    con.release();
+      con.release();
 
-    console.log(result.outBinds);
+      console.log(result.outBinds);
 
-    res.json(result.outBinds);
+      res.json({
+        data: "VACANTE REGISTRADA!!!",
+      });
+    } catch (error) {
+      res.json({ error: error.message });
+    }
   },
   listarVacantes: async (req, res) => {
     try {
