@@ -33,7 +33,7 @@ class Registro extends Component {
                   </div>
                   <h4 style={{paddingTop: '10px'}}>BOLSA DE TRABAJO | JobUES</h4>
                   <p>Tu Lugar Ideal, Exclusivo Egresados Familia UES</p>
-                  <span style={{display: this.props.registrado ? 'none' : 'block'}}>Ya tiene una cuenta?<br/>
+                  <span style={{display: this.props.registrado ? 'none' : 'block'}}>¿Ya posee una cuenta?<br/>
                     <Link to="/" className="button button-sliding-icon ripple-effect margin-top-10"> INGRESAR <i className="icon-material-outline-arrow-right-alt"></i></Link>
                   </span>
                 </div>
@@ -119,7 +119,7 @@ class Registro extends Component {
 
             </div>
           </div>
-          <ComoFunciona />
+         
         </div>
   
   

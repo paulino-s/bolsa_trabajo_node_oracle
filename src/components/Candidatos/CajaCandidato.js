@@ -34,7 +34,7 @@ const CajaCandidato = (props) => {
         <div className="freelancer-details-list">
           <ul style={{display: 'flex',flexDirection: 'column',width: '100%'}}>
             <li><i className="icon-material-outline-location-on"></i> Ubicación <strong>{props.ciudad}</strong></li>
-            <li><i className="icon-material-outline-location-on"></i> Sueldo <strong>${props.sueldoMin} MX - ${props.sueldoMax} MX</strong></li>
+            <li><i className="icon-material-outline-location-on"></i> Sueldo <strong>${props.sueldoMin} ${props.sueldoMax} $</strong></li>
             <li><i className="icon-material-outline-location-on"></i> Estudios <strong>{props.estudios}</strong></li>
           </ul>
         </div>

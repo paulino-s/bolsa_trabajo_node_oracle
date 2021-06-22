@@ -16,7 +16,7 @@ const Dashboard = (props) => {
             <div className="dashboard-content-container" data-simplebar>
 		        <div className="dashboard-content-inner" >
                     <div className="dashboard-headline">
-                        <h3>Bienvenido!</h3>
+                        <h3>Bienvenido</h3>
                         <h4>{props.email}</h4>
                         <span>Panel de control!</span>
                         <nav id="breadcrumbs" class="dark">
@@ -43,15 +43,15 @@ const Dashboard = (props) => {
                         </div>
                         <div className="fun-fact" data-fun-fact-color="#efa80f">
                             <div className="fun-fact-text">
-                                <span>Revisiones</span>
-                                <h4>28</h4>
+                                <span>Empresas Registradas</span>
+                                <h4>2</h4>
                             </div>
                             <div className="fun-fact-icon"><i class="icon-material-outline-rate-review"></i></div>
                         </div>
                         <div className="fun-fact" data-fun-fact-color="#2a41e6">
                             <div className="fun-fact-text">
                                 <span>Vistas por mes</span>
-                                <h4>987</h4>
+                                <h4>12</h4>
                             </div>
                             <div className="fun-fact-icon"><i class="icon-feather-trending-up"></i></div>
                         </div>

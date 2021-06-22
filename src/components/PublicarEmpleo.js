@@ -165,7 +165,7 @@ const PublicarEmpleo = (props) => {
                                   placeholder="Min"
                                   required
                                 />
-                                <i className="currency">BTC</i>
+                                <i className="currency">DLL</i>
                               </div>
                             </div>
                             <div className="col-xl-6">
@@ -177,7 +177,7 @@ const PublicarEmpleo = (props) => {
                                   placeholder="Max"
                                   required
                                 />
-                                <i className="currency">BTC</i>
+                                <i className="currency">DLL</i>
                               </div>
                             </div>
                           </div>

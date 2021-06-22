@@ -114,28 +114,29 @@ const PublicarCandidato = (props) => {
                             title="Categoría"
                             required
                           >
+                            	<option value="">Seleccionar Profesión</option>
                             <option value="Ingeniero Civil">
                               Ingeniero Civil
                             </option>
-                            <option value="Ingeniero Estructural">
-                              Ingeniero Estructural
+                            <option value="Ingeniero informatico">
+                              Ingeniero Informatico
                             </option>
                             <option value="Laboratorista de concreto">
-                              Laboratorista de concreto
+                              Laboratorista 
                             </option>
                             <option value="Arquitecto">Arquitecto</option>
-                            <option value="Dibujante">Dibujante</option>
+                            <option value="Economista">Economista</option>
                             <option value="Técnico de Mantenimiento">
                               Técnico de Mantenimiento
                             </option>
-                            <option value="Supervisor de Obra">
-                              Supervisor de Obra
+                            <option value="Ingeniero Industrial">
+                              Ingeniero Industrial
                             </option>
-                            <option value="Operador de Maquinaria">
-                              Operador de Maquinaria
+                            <option value="Medico">
+                              Medico
                             </option>
-                            <option value="Chofer de revolvedora">
-                              Chofer de revolvedora
+                            <option value="Licenciado en Derecho">
+                              Licenciado en Derecho
                             </option>
                           </select>
                         </div>

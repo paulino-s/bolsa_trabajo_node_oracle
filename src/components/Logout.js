@@ -21,7 +21,7 @@ const Logout = (props) => {
             </div>
           </div>
         </div>
-        <ComoFunciona />
+        
       </div>
     </div>
   );

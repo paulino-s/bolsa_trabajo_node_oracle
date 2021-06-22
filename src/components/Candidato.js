@@ -64,7 +64,7 @@ const Empleos = (props) => {
             <div className="col-xl-4 col-lg-4">
               <div className="sidebar-container">
                 <div className="profile-overview">
-                  <div className="overview-item"><span>Sueldo deseado:</span><strong>${Heroe.sueldoMax} MX</strong></div>
+                  <div className="overview-item"><span>Sueldo deseado:</span><strong>${Heroe.sueldoMax} DLL</strong></div>
                   <div className="overview-item"><span>Título:</span><strong>{Heroe.titulo}</strong></div>
                 </div>
                 <div className="profile-overview">

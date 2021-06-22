@@ -27,29 +27,45 @@ const SidebarEmpleos = (props) => {
 
 				<div className="sidebar-widget">
 					<h3>Profesión/Especialidad:</h3>
-					<select data-size="7" title="Todas" >
-						<option value="Ingeniero Civil">Ingeniero Civil</option>
-						<option value="Ingeniero Estructural">Ingeniero Estructural</option>
-						<option value="Laboratorista de concreto">Laboratorista de concreto</option>
-						<option value="Arquitecto">Arquitecto</option>
-						<option value="Dibujante">Dibujante</option>
-						<option value="Técnico de Mantenimiento">Técnico de Mantenimiento</option>
-						<option value="Supervisor de Obra">Supervisor de Obra</option>
-						<option value="Operador de Maquinaria">Operador de Maquinaria</option>
-						<option value="Chofer de revolvedora">Chofer de revolvedora</option>
+					<select name="estudios" data-size="7" title="Todas" onChange={props.filtroEstudios} >
+						<option value="">Seleccionar Profesión</option>
+						<option value="Ingeniero Civil">
+                              Ingeniero Civil
+                            </option>
+                            <option value="Ingeniero informatico">
+                              Ingeniero Informatico
+                            </option>
+                            <option value="Laboratorista de concreto">
+                              Laboratorista 
+                            </option>
+                            <option value="Arquitecto">Arquitecto</option>
+                            <option value="Economista">Economista</option>
+                            <option value="Técnico de Mantenimiento">
+                              Técnico de Mantenimiento
+                            </option>
+                            <option value="Ingeniero Industrial">
+                              Ingeniero Industrial
+                            </option>
+                            <option value="Medico">
+                              Medico
+                            </option>
+                            <option value="Licenciado en Derecho">
+                              Licenciado en Derecho
+                            </option>
 					</select>
 				</div>
 
 				<div className="sidebar-widget">
 					<h3>Sueldo:</h3>
 					<select data-size="7" title="Todas" >
+					<option value="500">$500 - $1000</option>
 						<option value="5000">$1,000 - $5,000</option>
 						<option value="10000">$5,000 - $10,000</option>
 						<option value="15000">$10,000 - $15,000</option>
 						<option value="20000">$15,000 - $20,000</option>
 						<option value="30000">$25,000 - $30,000</option>
 						<option value="35000">$30,000 - $35,000</option>
-						<option value="40000">$35,000 - $40,000</option>
+						
 					</select>
 				</div>
 

@@ -6,12 +6,16 @@ const Login = (props) => {
   console.log("estos son los props: " + props);
   return (
     <div>
+       
       <div className="container" style={{marginTop: '90px'}}>
         <div className="row">
+          
           <div className="col-xl-6 offset-xl-3">
+            
             <div className="login-register-page" style={{marginBottom: '90px'}}>
 
               <div className="welcome-text" style={{display: props.registrado ? 'none' : 'block'}}>
+            
                 <h3>BIENVENIDO</h3>
                 <h4 style={{paddingTop: '10px'}}>BOLSA DE TRABAJO JobUES</h4>
                 <p>Inicia un nuevo empleo al instante</p>
@@ -41,7 +45,7 @@ const Login = (props) => {
               <form onSubmit={props.handleSignIn} style={{display: props.registrado ? 'none' : 'block'}}>
                 <div className="input-with-icon-left">
                   <i className="icon-material-baseline-mail-outline"></i>
-                  <input type="email" name="emailaddress" className="input-text with-border" id="emailaddress" placeholder="Correo Electrónico" required/>
+                  <input type="email" name="emailaddress" className="input-text with-border" id="emailaddress" placeholder="Correo Electrónico" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required/>
                 </div>
 
                 <div className="input-with-icon-left">
@@ -55,9 +59,7 @@ const Login = (props) => {
           </div>
         </div>
       </div>
-      {
-        (props.registrado)? '' : <ComoFunciona/>
-      }
+    
       
     </div>
   );
