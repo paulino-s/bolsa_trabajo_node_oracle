@@ -15,7 +15,7 @@ var storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 const {
-  actualizarEstudiante,
+  actualizarEstudiante, MostrarEstudiantesID
 } = require("./controllers/Estudiantes_Controller");
 
 const {
@@ -57,6 +57,7 @@ router.post("/registro", registrar);
 router.post("/registrar-vacante", registrarVacante);
 
 router.get("/vacantes", listarVacantes);
+router.get("/MostrarEstudiantesID");
 
 router.post(
   "/actualizar-estudiante",

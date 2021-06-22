@@ -1,5 +1,5 @@
 module.exports = {
     ID_Login : Number,
-    Username : String,
+    Nombre_Completo : String,
     Password : String
     };
