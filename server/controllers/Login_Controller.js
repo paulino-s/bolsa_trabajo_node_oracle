@@ -1,6 +1,6 @@
+import { createHmac } from 'crypto';
 var login = require('../Models/Login');
 const oracledb = require("oracledb");
-import { createHmac } from 'crypto';
 const { getConnection } = require("../db");
 
 module.exports = {
