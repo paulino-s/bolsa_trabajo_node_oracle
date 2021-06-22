@@ -68,6 +68,7 @@ NOORDER NOCYCLE NOKEEP NOSCALE GLOBAL;
 
 -- PROCEDIMIENTOS
 
+
 create or replace NONEDITIONABLE PROCEDURE 
     insertarEstudiante(nombre in datos_estudiante.nombre_estudiante%type , correo_electronico in datos_estudiante.email%type, contra in usuario.password%type)
 is
@@ -79,6 +80,8 @@ exception
     when others then
         dbms_output.put_line(sqlcode||' '||sqlerrm);
 end;
+
+
 
 create or replace NONEDITIONABLE procedure
     insertarEmpresa(nombre registrar_empresas.nombre_completo%type, nom_emp registrar_empresas.nombre%type, email registrar_empresas.email%type,
@@ -94,19 +97,23 @@ exception
         rollback;
 end;
 
+
+
 create or replace NONEDITIONABLE procedure
-        insertarPerfil(idempresa registrar_empresas.idempresa%type,titulo perfil.titulo%type,tipo perfil.tipo%type,
-    categoria perfil.categoria%type,direccion perfil.direccion%type,ciudad perfil.ciudad%type, min_sal perfil.sueldo_min%type,
-    max_sal perfil.sueldo_max%type, contacto perfil.nombre_contacto%type, descripcion perfil.descripcion%type)
+        insertarPerfil(id_empresa registrar_empresas.idempresa%type,titulo perfil.titulo%type,tipo perfil.tipo%type,
+    rubro perfil.rubro%type,direccion perfil.direccion%type,ciudad perfil.ciudad%type, min_sal perfil.sueldo_min%type,
+    max_sal perfil.sueldo_max%type, habilidades perfil.habilidades%type, descripcion perfil.descripcion%type)
 is
 begin
-    insert into perfil values(SEQUENCE_PERFIL.nextval,idempresa,titulo,tipo,categoria,direccion,ciudad,min_sal,max_sal,contacto,descripcion);
+    insert into perfil (idperfil,idempresa,titulo,tipo,rubro,direccion,ciudad,sueldo_min,sueldo_max,habilidades,descripcion) values(SEQUENCE_PERFIL.nextval,id_empresa,titulo,tipo,rubro,direccion,ciudad,min_sal,max_sal,habilidades,descripcion);
     commit;
 exception
     when others then
         dbms_output.put_line(sqlcode||' '||sqlerrm);
         rollback;
 end;
+
+
 
 create or replace NONEDITIONABLE procedure vacantes(c_vacantes out var_bolsa_trabajo.cur_ofertas)
 is
@@ -119,6 +126,8 @@ exception
         dbms_output.put_line(sqlcode||' '||sqlerrm);
         rollback;
 end;
+
+
 
 create or replace NONEDITIONABLE procedure 
     actualizarDatosEstudiante(
@@ -141,6 +150,7 @@ exception
     when others then
         dbms_output.put_line(sqlcode||' '||sqlerrm);
 end;
+
 
 --PACKAGE
 
