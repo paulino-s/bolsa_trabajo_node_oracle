@@ -2,6 +2,7 @@ var estudiante = require("../Models/Estudiante");
 const oracledb = require("oracledb");
 const { getConnection } = require("../db");
 const path = require("path");
+var { createHmac } = require('crypto');
 
 module.exports = {
   registrarEstudiante: async (req, res) => {
@@ -13,7 +14,10 @@ module.exports = {
       console.log(estudiante);
 
       let con = await getConnection();
-
+      password = createHmac('sha256', password)
+               .update('I love cupcakes')
+               .digest('hex');
+      console.log(password);
       let result = await con.execute(
         `BEGIN insertarEstudiante(:Nombre_Estudiante, :Email, :Pass); END;`,
         {

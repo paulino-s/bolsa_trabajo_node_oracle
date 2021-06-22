@@ -255,12 +255,13 @@ class App extends Component {
     };
 
     axios
-      .post(`http://18.219.47.222/apis/bolsadetrabajo/showusuarios.php`, {
-        usuario,
+      .post(`http://localhost:3001/loggearse`, {
+        usuario
       })
       .then((res) => {
+        console.log('no');
         console.log(res);
-        console.log(typeof res.data);
+        //console.log(typeof res.data);
         if (res.data === "found") {
           console.log("Ya entraste!!!");
           this.setState({

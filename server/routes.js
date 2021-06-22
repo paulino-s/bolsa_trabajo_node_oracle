@@ -24,6 +24,10 @@ const {
 } = require("./controllers/VacanteController");
 const { registrar } = require("./controllers/registerController");
 
+const{
+  loggearse
+} = require('./controllers/Login_Controller')
+
 router.get("/", (req, res) => {
   res.status(200).json({
     message: "Probando servidor",
@@ -58,6 +62,7 @@ router.post("/registrar-vacante", registrarVacante);
 
 router.get("/vacantes", listarVacantes);
 router.get("/MostrarEstudiantesID");
+router.post("/loggearse",loggearse);
 
 router.post(
   "/actualizar-estudiante",

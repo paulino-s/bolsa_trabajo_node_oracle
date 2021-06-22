@@ -1,3 +1,4 @@
+var { createHmac } = require('crypto');
 var empresa = require("../Models/Empresas");
 const oracledb = require("oracledb");
 const { getConnection } = require("../db");
@@ -9,12 +10,16 @@ module.exports = {
 
       console.log(nombre, empresa, emailaddress, telefono, password);
 
+      let enpassword = createHmac('sha256', password)
+               .update('I love cupcakes')
+               .digest('hex');
+      console.log(enpassword);
       let con = await getConnection();
 
       let result = await con.execute(
         `
             BEGIN
-              insertarEmpresa(:nombre, :empresa, :emailaddress, :telefono, :password); 
+              insertarEmpresa(:nombre, :empresa, :emailaddress, :telefono, :enpassword); 
             END;
           `,
         {
@@ -22,7 +27,7 @@ module.exports = {
           empresa,
           emailaddress,
           telefono,
-          password,
+          enpassword,
         },
         {
           autoCommit: true,

@@ -1,4 +1,4 @@
-import { createHmac } from 'crypto';
+var { createHmac } = require('crypto');
 var login = require('../Models/Login');
 const oracledb = require("oracledb");
 const { getConnection } = require("../db");
@@ -45,33 +45,9 @@ module.exports = {
   },
   loggearse: async (req, res) =>  {
     login = res.body;
-    const {
-      scryptSync,
-      createDecipheriv,
-    } = require('crypto');
-    
-    const algorithm = 'sha256';
-    const password = 'I love cupcakes';
-    // Key length is dependent on the algorithm. In this case for aes192, it is
-    // 24 bytes (192 bits).
-    // Use the async `crypto.scrypt()` instead.
-    const key = scryptSync(password, 'salt', 24);
-    // The IV is usually passed along with the ciphertext.
-    const iv = Buffer.alloc(16, 0); // Initialization vector.
-    
-    const decipher = createDecipheriv(algorithm, key, iv);
-    let chunk;
-    let decrypted = '';
-    decipher.on('readable', () => {
-      while (null !== (chunk = decipher.read())) {
-        decrypted += chunk.toString('utf8');
-      }
-    });
-    decipher.on('end', () => {
-      console.log(decrypted);
-      // Prints: some clear text data
-    });
-    
+    console.log(res.body);
+
+
 
     try {
       login = req.body;
@@ -85,15 +61,12 @@ module.exports = {
      [login.Username],  // bind value for :id
      { extendedMetaData: true })
 
-     let passworddec = decipher.write(result.Password, 'hex');
-     decipher.end();
 
-     if (passworddec === login.Password) {
-       return true;
-     }
+
+        return result;
      
     } catch (error) {
-      return false;
+   
     }
 
   }
