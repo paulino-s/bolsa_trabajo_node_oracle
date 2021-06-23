@@ -62,7 +62,7 @@ router.post("/registrar-vacante", registrarVacante);
 
 router.get("/vacantes", listarVacantes);
 router.get("/MostrarEstudiantesID");
-router.post("/loggearse",loggearse);
+router.post("/loggearse", loggearse);
 
 router.post(
   "/actualizar-estudiante",

@@ -79,7 +79,7 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    console.log(`El usuario al cargar: ${this.state.user.nombre}`);
+    console.log(`El usuario al cargar: ${this.state.email}`);
   }
 
   handleChange = (event) => {
@@ -248,25 +248,21 @@ class App extends Component {
     event.preventDefault();
     let emailaddress = event.target.emailaddress.value;
     let password = event.target.password.value;
-
-    const usuario = {
+    
+    var usuario = {
       emailaddress: emailaddress,
       password: password,
     };
-
-    axios
-      .post(`http://localhost:3001/loggearse`, {
-        usuario
-      })
+    //console.log(usuario);
+    axios.post(`http://localhost:3001/loggearse`,usuario)
       .then((res) => {
-        console.log('no');
-        console.log(res);
+        console.log(res.data);
         //console.log(typeof res.data);
-        if (res.data === "found") {
+        if (1) {
           console.log("Ya entraste!!!");
           this.setState({
             email: emailaddress,
-            password: password,
+            password: res.data[2],
             registrado: true,
             nota: false,
           });

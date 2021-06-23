@@ -44,29 +44,31 @@ module.exports = {
     res.json(result.outBinds);
   },
   loggearse: async (req, res) =>  {
-    login = res.body;
-    console.log(res.body);
-
-
-
+    let usuario = req.body;
     try {
-      login = req.body;
 
       let con = await getConnection();
 
       let result = await con.execute(  
         `SELECT *
-        FROM Login
-        WHERE Nombre_Completo = :Nombre_Completo`,
-     [login.Username],  // bind value for :id
+        FROM USUARIO
+        WHERE USER_NAME = :Nombre_Completo`,
+     [usuario.emailaddress],  // bind value for :id
      { extendedMetaData: true })
-
-
-
-        return result;
+        
+        usuario.password = createHmac('sha256', usuario.password)
+               .update('I love cupcakes')
+               .digest('hex');
+        if (usuario.password === result.rows[0][2]) {
+          
+          //console.log(result.rows[0]);
+          con.release();
+          res.json(result.rows[0]);
+        }
+        
      
     } catch (error) {
-   
+      console.log(error);
     }
 
   }
