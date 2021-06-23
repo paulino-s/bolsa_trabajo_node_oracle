@@ -55,7 +55,7 @@ const Empleos = (props) => {
               </div>
               <div className="boxed-list margin-bottom-60">
                 <div className="boxed-list-headline">
-                  <h3><i className="icon-material-outline-business"></i> Historia Laboral</h3>
+                  <h3><i className="icon-material-outline-business"></i> Historial Laboral</h3>
                 </div>
                 
               </div>

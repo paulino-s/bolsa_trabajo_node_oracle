@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
-import ComoFunciona from './Banners/ComoFunciona';
+
 
 class Registro extends Component {
 
@@ -64,22 +64,22 @@ class Registro extends Component {
                     <form onSubmit={this.props.handleRegistro} style={{display: this.props.registrado ? 'none' : 'block'}}>
                       <div className="input-with-icon-left">
                         <i className="icon-line-awesome-smile-o"></i>
-                        <input type="text" className="input-text with-border" name="nombre" placeholder="Nombre completo"/>
+                        <input type="text" className="input-text with-border" name="nombre" placeholder="Nombre completo" required/>
                         <input type="hidden" name="tipo" value="candidato"/>
                         <input type="hidden" name="empresa" value=""/>
                         <input type="hidden" name="telefono" value=""/>
                       </div>
                       <div className="input-with-icon-left">
                         <i className="icon-material-baseline-mail-outline"></i>
-                        <input type="email" className="input-text with-border" name="emailaddress" id="emailaddress-register" placeholder="Correo Electrónico"/>
+                        <input type="email" className="input-text with-border" name="emailaddress" id="emailaddress-register" placeholder="Correo Electrónico" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"required/>
                       </div>
                       <div className="input-with-icon-left">
                         <i className="icon-material-outline-lock"></i>
-                        <input type="password" className="input-text with-border" name="password" id="password-register" placeholder="Contraseña"/>
+                        <input type="password"  className="input-text with-border" name="password" id="password-register"  placeholder="Contraseña" alt="strongPass" minlength="6" maxlength="20" required/>
                       </div>
                       <div className="input-with-icon-left">
                         <i className="icon-material-outline-lock"></i>
-                        <input type="password" className="input-text with-border" name="password-repeat-register" id="password-repeat-register" placeholder="Repetir Contraseña"/>
+                        <input type="password" className="input-text with-border" name="password-repeat-register" id="password-repeat-register" placeholder="Repetir Contraseña" alt="strongPass" minlength="6" maxlength="20" required/>
                       </div>
       
                       <button className="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit" >REGISTRO <i className="icon-material-outline-arrow-right-alt"></i></button>
@@ -88,32 +88,40 @@ class Registro extends Component {
                     <form onSubmit={this.props.handleRegistro} style={{display: this.props.registrado ? 'none' : 'block'}}>
                       <div className="input-with-icon-left">
                         <i className="icon-line-awesome-smile-o"></i>
-                        <input type="text" className="input-text with-border" name="nombre" placeholder="Nombre completo"/>
+                        <input type="text" className="input-text with-border" name="nombre" placeholder="Nombre completo" required/>
                         <input type="hidden" name="tipo" value="empresa"/>
                       </div>
                       <div className="input-with-icon-left">
                         <i className="icon-line-awesome-street-view"></i>
-                        <input type="text" className="input-text with-border" name="empresa" id="empresa-register" placeholder="Nombre de la empresa"/>
+                        <input type="text" className="input-text with-border" name="empresa" id="empresa-register" placeholder="Nombre de la empresa" required/>
                       </div>
                       <div className="input-with-icon-left">
                         <i className="icon-material-baseline-mail-outline"></i>
-                        <input type="email" className="input-text with-border" name="emailaddress" id="emailaddress-register" placeholder="Correo Electrónico"/>
+                        <input type="email" className="input-text with-border" name="emailaddress" id="emailaddress-register" placeholder="Correo Electrónico" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"required/>
                       </div>
                       <div className="input-with-icon-left">
                         <i className="icon-line-awesome-mobile-phone"></i>
-                        <input type="text" className="input-text with-border" name="telefono" id="telefono-register" placeholder="Teléfono"/>
+                        <input type="number" className="input-text with-border" name="telefono" id="telefono-register" placeholder="Teléfono" alt="number" minlength="8" maxlength="8" required/>
+                      </div>
+                    
+                      <div className="input-with-icon-left">
+                        <i className="icon-material-outline-lock"></i>
+                        <input type="password" className="input-text with-border" name="password" id="password-register" placeholder="Contraseña"alt="strongPass" minlength="6" maxlength="20" required/>
                       </div>
                       <div className="input-with-icon-left">
                         <i className="icon-material-outline-lock"></i>
-                        <input type="password" className="input-text with-border" name="password" id="password-register" placeholder="Contraseña"/>
-                      </div>
-                      <div className="input-with-icon-left">
-                        <i className="icon-material-outline-lock"></i>
-                        <input type="password" className="input-text with-border" name="password-repeat-register" id="password-repeat-register" placeholder="Repetir Contraseña"/>
+                        <input type="password" className="input-text with-border" name="password-repeat-register" id="password-repeat-register" placeholder="Repetir Contraseña" required/>
                       </div>
       
                       <button className="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit" >REGISTRO <i className="icon-material-outline-arrow-right-alt"></i></button>
+                    
+                    
+                    
+                    
                     </form>
+                   
+
+
                 }
               </div>
 
@@ -131,3 +139,5 @@ class Registro extends Component {
 }
  
 export default Registro;
+
+

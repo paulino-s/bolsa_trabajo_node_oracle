@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div style={{height: '100vh'}}>
       <IntroBanner/>
-      <ComoFunciona/>
+      
     </div>
   );
 }

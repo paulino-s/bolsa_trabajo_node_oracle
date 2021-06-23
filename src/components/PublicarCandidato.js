@@ -72,7 +72,9 @@ const PublicarCandidato = (props) => {
                           <input
                             name="id_estudiante"
                             type="text"
-                            className="with-border"
+
+                          className="with-border"
+                          minlength="7" maxlength="7" 
                             required
                           />
                         </div>
@@ -213,8 +215,9 @@ const PublicarCandidato = (props) => {
                           <h5>Teléfono Fijo:</h5>
                           <input
                             name="telefonofijo"
-                            type="number"
+                            type="text"
                             className="with-border"
+                            alt="number" minlength="8" maxlength="8" 
                           />
                         </div>
                       </div>
@@ -223,10 +226,9 @@ const PublicarCandidato = (props) => {
                           <h5>Teléfono Personal:</h5>
                           <input
                             name="telefonopersonal"
-                            type="number"
+                            type="text"
                             className="with-border"
-                            required
-                          />
+                            alt="number" minlength="8" maxlength="8" required/>
                         </div>
                       </div>
 
@@ -235,9 +237,9 @@ const PublicarCandidato = (props) => {
                           <h5>Correo Electrónico:</h5>
                           <input
                             name="email"
-                            type="text"
+                            type="email"
                             className="with-border"
-                            required
+                            placeholder="Usar Mismo Email del Registro" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"required
                           />
                         </div>
                       </div>
@@ -248,7 +250,9 @@ const PublicarCandidato = (props) => {
                             name="nit"
                             type="number"
                             className="with-border"
-                            required
+                            placeholder="Sin Guion"
+                            min="14" max="14" required
+                            
                           />
                         </div>
                       </div>
@@ -285,7 +289,7 @@ const PublicarCandidato = (props) => {
                                   className="with-border"
                                   type="text"
                                   placeholder="Min"
-                                  required
+                                  
                                 />
                                 <i className="currency">DL</i>
                               </div>
@@ -297,7 +301,7 @@ const PublicarCandidato = (props) => {
                                   className="with-border"
                                   type="text"
                                   placeholder="Max"
-                                  required
+                                  
                                 />
                                 <i className="currency">DL</i>
                               </div>

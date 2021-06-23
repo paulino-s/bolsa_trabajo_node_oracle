@@ -118,6 +118,12 @@ const Header = (props) => {
                   <li>
                     <Link to="/quienes-somos">QUIENES SOMOS</Link>
                   </li>
+                  <li>
+                    <Link to="/publicar-candidato">REGISTRAR CANDIDATO</Link>
+                  </li>
+                  <li>
+                    <Link to="/RegistroEmpresa">REGISTRAR EMPRESA</Link>
+                  </li>
                 </ul>
               </nav>
               <div className="clearfix"></div>
