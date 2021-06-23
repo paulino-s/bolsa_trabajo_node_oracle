@@ -64,6 +64,9 @@ module.exports = {
           //console.log(result.rows[0]);
           con.release();
           res.json(result.rows[0]);
+        }else{
+          con.release();
+          res.json({});
         }
         
      

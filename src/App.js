@@ -258,7 +258,7 @@ class App extends Component {
       .then((res) => {
         console.log(res.data);
         //console.log(typeof res.data);
-        if (1) {
+        if (res.data[2] != null) {
           console.log("Ya entraste!!!");
           this.setState({
             email: emailaddress,
