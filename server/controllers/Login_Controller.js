@@ -1,5 +1,5 @@
-var { createHmac } = require('crypto');
-var login = require('../Models/Login');
+var { createHmac } = require("crypto");
+var login = require("../Models/Login");
 const oracledb = require("oracledb");
 const { getConnection } = require("../db");
 
@@ -10,9 +10,9 @@ module.exports = {
     console.log(login);
 
     let con = await getConnection();
-    login.Password = createHmac('sha256', login.Password)
-               .update('I love cupcakes')
-               .digest('hex');
+    login.Password = createHmac("sha256", login.Password)
+      .update("I love cupcakes")
+      .digest("hex");
 
     let result = await con.execute(
       `
@@ -22,15 +22,15 @@ module.exports = {
       `,
       {
         Username: {
-            dir: oracledb.BIND_IN,
-            val: login.Username,
-            type: oracledb.STRING,
-          },
-          Nombre: {
-            dir: oracledb.BIND_IN,
-            val: login.Password,
-            type: oracledb.STRING,
-          }
+          dir: oracledb.BIND_IN,
+          val: login.Username,
+          type: oracledb.STRING,
+        },
+        Nombre: {
+          dir: oracledb.BIND_IN,
+          val: login.Password,
+          type: oracledb.STRING,
+        },
       },
       {
         autoCommit: true,
@@ -43,36 +43,60 @@ module.exports = {
 
     res.json(result.outBinds);
   },
-  loggearse: async (req, res) =>  {
-    let usuario = req.body;
-    try {
+  loggearse: async (req, res) => {
+    console.log("BODY");
+    console.log(req.body);
 
+    let { emailaddress, password } = req.body;
+    try {
       let con = await getConnection();
 
-      let result = await con.execute(  
-        `SELECT *
-        FROM USUARIO
-        WHERE USER_NAME = :Nombre_Completo`,
-     [usuario.emailaddress],  // bind value for :id
-     { extendedMetaData: true })
-        
-        usuario.password = createHmac('sha256', usuario.password)
-               .update('I love cupcakes')
-               .digest('hex');
-        if (usuario.password === result.rows[0][2]) {
-          
-          //console.log(result.rows[0]);
-          con.release();
-          res.json(result.rows[0]);
-        }else{
-          con.release();
-          res.json({});
-        }
-        
-     
-    } catch (error) {
-      console.log(error);
-    }
+      let result = await con.execute(
+        `
+          BEGIN
+            verificarUsuario(:cursor , :user);
+          END;
+        `,
+        {
+          cursor: {
+            type: oracledb.DB_TYPE_CURSOR,
+            dir: oracledb.BIND_OUT,
+          },
+          user: {
+            type: oracledb.DB_TYPE_VARCHAR,
+            dir: oracledb.BIND_IN,
+            val: emailaddress,
+          },
+        }, // bind value for :id
+        { resultSet: true }
+      );
 
-  }
+      let resultset = result.outBinds.cursor;
+
+      let row = await resultset.getRow();
+
+      console.log("ROW");
+      console.log(row);
+
+      let password_hash = createHmac("sha256", password)
+        .update("I love cupcakes")
+        .digest("hex");
+
+      console.log(password_hash);
+
+      if (password_hash === row[2]) {
+        con.release();
+        res.json(row);
+      } else {
+        con.release();
+        res.json({
+          found: false,
+        });
+      }
+    } catch (error) {
+      res.json({
+        found: false,
+      });
+    }
+  },
 };

@@ -248,36 +248,35 @@ class App extends Component {
     event.preventDefault();
     let emailaddress = event.target.emailaddress.value;
     let password = event.target.password.value;
-    
+
     var usuario = {
       emailaddress: emailaddress,
       password: password,
     };
     //console.log(usuario);
-    axios.post(`http://localhost:3001/loggearse`,usuario)
-      .then((res) => {
-        console.log(res.data);
-        //console.log(typeof res.data);
-        if (res.data[2] != null) {
-          console.log("Ya entraste!!!");
-          this.setState({
-            email: emailaddress,
-            password: res.data[2],
-            registrado: true,
-            nota: false,
-          });
-          return <Redirect to="/dashboard" />;
-        } else {
-          console.log("no entraste!!!");
-          this.setState({
-            email: "",
-            password: "",
-            registrado: false,
-            nota: true,
-          });
-          return <Redirect to="/" />;
-        }
-      });
+    axios.post(`http://localhost:3001/loggearse`, usuario).then((res) => {
+      console.log(res.data);
+      //console.log(typeof res.data);
+      if (res.data[2] != null) {
+        console.log("Ya entraste!!!");
+        this.setState({
+          email: emailaddress,
+          password: res.data[2],
+          registrado: true,
+          nota: false,
+        });
+        return <Redirect to="/dashboard" />;
+      } else {
+        console.log("no entraste!!!");
+        this.setState({
+          email: "",
+          password: "",
+          registrado: false,
+          nota: true,
+        });
+        return <Redirect to="/" />;
+      }
+    });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

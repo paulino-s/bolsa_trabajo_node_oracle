@@ -1,9 +1,9 @@
 const oracledb = require("oracledb");
 
 var db = {
-  user: "bolsadb",
-  password: "v1",
-  connectString: "localhost:1521/XEPDB1",
+  user: "paulino",
+  password: "123",
+  connectString: "localhost:1521/XE",
 };
 
 /*FUNCION PARA LLAMAR DB*/

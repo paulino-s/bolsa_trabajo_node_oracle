@@ -172,6 +172,7 @@ as
         habilidades perfil.habilidades%type
     );
     type cur_ofertas is ref cursor return ofe_emp;
+    type cur_usuario is ref cursor return usuario%rowtype;
 end var_bolsa_trabajo;
 
 
