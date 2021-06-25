@@ -39,7 +39,7 @@ module.exports = {
         {
           id: {
             dir: oracledb.BIND_IN,
-            val: 23,
+            val: Number(req.session.user_id), // Empresa ID
             type: oracledb.NUMBER,
           },
           vacante: {

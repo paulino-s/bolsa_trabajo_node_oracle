@@ -23,6 +23,8 @@ import PublicarCandidato from "./components/PublicarCandidato";
 import "./App.css";
 import axios from "axios";
 
+axios.defaults.withCredentials = true;
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -321,19 +323,30 @@ class App extends Component {
   };
 
   signOut = (history) => {
-    this.setState((prevState) => ({
-      user: {
-        ...prevState.user,
-        nombre: "",
-        avatar: "",
-        emailaddress: "",
-        password: "",
-        tipo: "",
-        empresa: "",
-        telefono: "",
-      },
-      registrado: false,
-    }));
+    axios
+      .post(
+        `http://localhost:3001/logout`,
+        {},
+        { withCredentials: true, credentials: "include" }
+      )
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        this.setState((prevState) => ({
+          user: {
+            ...prevState.user,
+            nombre: "",
+            avatar: "",
+            emailaddress: "",
+            password: "",
+            tipo: "",
+            empresa: "",
+            telefono: "",
+          },
+          registrado: false,
+        }));
+      })
+      .catch((err) => console.log(err));
   };
 
   headerNotifications = (event) => {
