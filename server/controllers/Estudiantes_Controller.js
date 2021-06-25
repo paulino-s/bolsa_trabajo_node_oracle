@@ -222,7 +222,63 @@ module.exports = {
       res.json([{ error: error.message }]);
     }
   },
+  mostrarEstudiantes: async (req, res) => {
+    try {
+      let con = await getConnection();
 
+      let result = await con.execute(
+        `
+          BEGIN
+            estudiantes(:cursor);
+          END;
+        `,
+        {
+          cursor: {
+            type: oracledb.DB_TYPE_CURSOR,
+            dir: oracledb.BIND_OUT,
+          },
+        }, // bind value for :id
+        { resultSet: true }
+      );
+
+      let rs = result.outBinds.cursor;
+      let estudiantes = [];
+      let row;
+
+      while ((row = await rs.getRow())) {
+        estudiantes.push({
+          id: row[0],
+          nombre: row[2],
+          apellidos: row[4],
+          sexo: row[5],
+          fecha: row[6],
+          titulo: row[7],
+          jornada: row[8],
+          direccion: row[9],
+          ciudad: row[10],
+          telefonoFijo: row[11],
+          telefonoPersonal: row[12],
+          email: row[3],
+          nit: row[13],
+          nup: row[14],
+          facebook: row[15],
+          sueldoMin: row[16],
+          sueldoMax: row[17],
+          descripcion: row[18],
+          cv_path: row[19],
+          carnet: row[20],
+        });
+      }
+
+      console.log([estudiantes]);
+
+      res.json(estudiantes);
+    } catch (error) {
+      res.json({
+        error: error.message,
+      });
+    }
+  },
   MostrarEstudiantesID: async (req, res) => {
     try {
       estudiante = req.body;

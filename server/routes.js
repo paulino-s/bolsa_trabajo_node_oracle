@@ -17,6 +17,7 @@ const upload = multer({ storage: storage });
 const {
   actualizarEstudiante,
   MostrarEstudiantesID,
+  mostrarEstudiantes,
 } = require("./controllers/Estudiantes_Controller");
 
 const {
@@ -69,5 +70,7 @@ router.post(
   upload.single("cv"),
   actualizarEstudiante
 );
+
+router.get("/estudiantes", mostrarEstudiantes);
 
 module.exports = router;

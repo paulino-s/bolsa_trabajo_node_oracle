@@ -20,7 +20,8 @@ CREATE TABLE DATOS_ESTUDIANTE(
     SUELDO_MIN NUMBER(10,2),
     SUELDO_MAX NUMBER(10,2),
     DESCRIPCION CLOB,
-    PATH_CV VARCHAR2(150)
+    PATH_CV VARCHAR2(150),
+    CARNET VARCHAR2(20)
 );
 
 CREATE TABLE USUARIO (
@@ -190,6 +191,16 @@ exception
         dbms_output.put_line(sqlcode||' '||sqlerrm);
 end;
 
+
+create or replace procedure estudiantes(v_est out var_bolsa_trabajo.cur_estudiantes)
+is
+begin
+    open v_est for select * from datos_estudiante;
+exception
+    when others then
+        dbms_output.put_line(sqlcode||' '||sqlerrm);
+end;
+
 --PACKAGE
 
 create or replace NONEDITIONABLE package var_bolsa_trabajo
@@ -217,6 +228,7 @@ as
     );
     type cur_ofertas is ref cursor return ofe_emp;
     type cur_usuario is ref cursor return t_user;
+    type cur_estudiantes is ref cursor return datos_estudiante%rowtype;
 end var_bolsa_trabajo;
 
 
