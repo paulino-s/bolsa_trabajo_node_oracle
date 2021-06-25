@@ -67,28 +67,18 @@ class App extends Component {
   }
   //Muestra informacion de los candidatos
   componentDidMount() {
-    axios
-      .get(`http://localhost:3001/estudiantes`, {
-        withCredentials: true,
-        credentials: "include",
-      })
-      .then((res) => {
-        const candidatos = res.data;
-        console.log(candidatos);
-        this.setState({ candidatos });
-      });
+    axios.get(`http://localhost:3001/estudiantes`).then((res) => {
+      const candidatos = res.data;
+      console.log(candidatos);
+      this.setState({ candidatos });
+    });
     //Muestra informacion de empresas
-    axios
-      .get(`http://localhost:3001/vacantes`, {
-        withCredentials: true,
-        credentials: "include",
-      })
-      .then((res) => {
-        const empresas = res.data;
-        console.log("COMPONENTDIDMOUNT");
-        console.log(empresas);
-        this.setState({ empresas });
-      });
+    axios.get(`http://localhost:3001/vacantes`).then((res) => {
+      const empresas = res.data;
+      console.log("COMPONENTDIDMOUNT");
+      console.log(empresas);
+      this.setState({ empresas });
+    });
   }
 
   componentDidUpdate() {
@@ -215,16 +205,13 @@ class App extends Component {
       .then((res) => {
         console.log(res);
         console.log(res.data);
-      });
-    //Mostrar empresas
-    axios
-      .get(`http://localhost:3001/vacantes`, {
-        withCredentials: true,
-        credentials: "include",
-      })
-      .then((res) => {
-        const candidatos = res.data;
-        this.setState({ candidatos });
+        //Mostrar empresas
+        axios.get(`http://localhost:3001/vacantes`).then((res) => {
+          console.log("EMPRESAS");
+          const empresas = res.data;
+          console.log(empresas);
+          this.setState({ empresas });
+        });
       });
 
     window.scrollTo(0, 0);
@@ -294,15 +281,10 @@ class App extends Component {
         console.log(res.data);
       });
     //Mostrar candidatos
-    axios
-      .get(`http://localhost:3001/estudiantes`, {
-        withCredentials: true,
-        credentials: "include",
-      })
-      .then((res) => {
-        const candidatos = res.data;
-        this.setState({ candidatos });
-      });
+    axios.get(`http://localhost:3001/estudiantes`).then((res) => {
+      const candidatos = res.data;
+      this.setState({ candidatos });
+    });
 
     window.scrollTo(0, 0);
     alert("CANDIDATO AGREGADO CON ÉXITO!!!");
