@@ -113,7 +113,7 @@ const Header = (props) => {
                     <Link to="/empleos">VACANTES</Link>
                   </li>
                   <li>
-                    <Link to="/contacto">CONTACTO</Link>
+                    <Link to="/ComoFunciona">CONTACTO</Link>
                   </li>
                   <li>
                     <Link to="/quienes-somos">QUIENES SOMOS</Link>

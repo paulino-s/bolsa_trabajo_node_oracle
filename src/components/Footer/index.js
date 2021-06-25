@@ -9,7 +9,9 @@ const Footer = () => {
           <div className="row">
             <div className="col-xl-12">
               <div className="footer-rows-container">
+               
                 <div className="footer-rows-left">
+                 
                   <div className="footer-row">
                     <div className="footer-row-inner footer-logo">
                       <img src={logoblanco} alt="JobUES" title="JobUES" style={{width: '150px'}} />

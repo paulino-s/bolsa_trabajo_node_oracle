@@ -1,10 +1,8 @@
-import React from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
+import DashboardSidebarEmpresa from "./Dashboard/DashboardSidebarEmpresa";
 
 
-const ComoFunciona = () => {
-  return(
-    
 <div class="site-section">
 <div class="container">
   <div class="row justify-content-center text-center mb-5">
@@ -66,8 +64,4 @@ const ComoFunciona = () => {
 
 </div>
 </div>
-    
-  )
-}
-
 export default ComoFunciona;

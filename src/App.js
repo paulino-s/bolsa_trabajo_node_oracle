@@ -178,7 +178,7 @@ class App extends Component {
     event.preventDefault();
 
     const empresa = {
-      logo: "http://www.imcyc.com/wp-content/uploads/2017/07/logo_200.png",
+      logo: "jobues2.png",
       vacante: event.target.vacante.value,
       tipoVacante: event.target.tipoVacante.value,
       rubro: event.target.rubro.value,
@@ -215,7 +215,7 @@ class App extends Component {
       });
 
     window.scrollTo(0, 0);
-    alert("OFERTA AGREGADA CON ÉXITO!!!");
+    alert("OFERTA AGREGADA CON ÉXITO");
   };
   handlePublicarCandidato = (event) => {
     event.preventDefault();

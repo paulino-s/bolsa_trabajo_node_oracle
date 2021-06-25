@@ -8,7 +8,7 @@ const Membresias = () => {
 
 			<div class="col-xl-12">
 				<div class="section-headline centered margin-top-0 margin-bottom-35">
-					<h3>Membresías IMCYC</h3>
+					<h3>Membresías</h3>
 				</div>
 			</div>
 

@@ -759,7 +759,7 @@ const PublicarCandidato = (props) => {
                       */}
                       <div className="col-xl-12">
                         <div className="submit-field">
-                          <h5>Descripción de habilidades y/o experiencia:</h5>
+                          <h5>Descripción Experiencia, Habilidades, Curriculum:</h5>
                           <textarea
                             name="descripcion"
                             cols="30"
@@ -783,7 +783,7 @@ const PublicarCandidato = (props) => {
                               Subir Archivo
                             </label>
                             <span className="uploadButton-file-name">
-                              Imágenes o documentos que describan la vacante.
+                              Insertar Curriculum en formato PDF
                             </span>
                           </div>
                         </div>
