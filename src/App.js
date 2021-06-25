@@ -55,6 +55,7 @@ class App extends Component {
           visible: false,
         },
       ],
+      candidatosFiltrados: [],
       filtrados: [],
       nombre: "",
       email: "",
@@ -66,18 +67,28 @@ class App extends Component {
   }
   //Muestra informacion de los candidatos
   componentDidMount() {
-    /* axios.get(`http://18.219.47.222/apis/bolsadetrabajo/candidatos.php`)
-      .then(res => {
+    axios
+      .get(`http://localhost:3001/estudiantes`, {
+        withCredentials: true,
+        credentials: "include",
+      })
+      .then((res) => {
         const candidatos = res.data;
+        console.log(candidatos);
         this.setState({ candidatos });
-      })*/
+      });
     //Muestra informacion de empresas
-    axios.get(`http://localhost:3001/vacantes`).then((res) => {
-      const empresas = res.data;
-      console.log("COMPONENTDIDMOUNT");
-      console.log(empresas);
-      this.setState({ empresas });
-    });
+    axios
+      .get(`http://localhost:3001/vacantes`, {
+        withCredentials: true,
+        credentials: "include",
+      })
+      .then((res) => {
+        const empresas = res.data;
+        console.log("COMPONENTDIDMOUNT");
+        console.log(empresas);
+        this.setState({ empresas });
+      });
   }
 
   componentDidUpdate() {
@@ -122,6 +133,8 @@ class App extends Component {
   filtroCiudad = (e) => {
     console.log(e.target.value);
     const ciudad = e.target.value;
+    console.log("FILTRO CANDIDATOS");
+    console.log(ciudad);
     const candidatos = this.state.candidatos.filter(
       (candidato) => candidato.ciudad === ciudad
     );
@@ -147,7 +160,7 @@ class App extends Component {
     console.log(e.target.value);
     const estudios = e.target.value;
     const candidatos = this.state.candidatos.filter(
-      (candidato) => candidato.estudios === estudios
+      (candidato) => candidato.titulo === estudios
     );
     this.setState({
       candidatos: candidatos,
@@ -155,10 +168,11 @@ class App extends Component {
   };
 
   filtroTipo = (e) => {
+    console.log("FILTRO TIPO");
     console.log(e.target.value);
     const tipo = e.target.value;
     const candidatos = this.state.candidatos.filter(
-      (candidato) => candidato.tipo === tipo
+      (candidato) => candidato.jornada === tipo
     );
     this.setState({
       candidatos: candidatos,
@@ -191,18 +205,27 @@ class App extends Component {
     //Crear empresa
 
     axios
-      .post(`http://localhost:3001/registrar-vacante`, {
-        ...empresa,
-      })
+      .post(
+        `http://localhost:3001/registrar-vacante`,
+        {
+          ...empresa,
+        },
+        { withCredentials: true, credentials: "include" }
+      )
       .then((res) => {
         console.log(res);
         console.log(res.data);
       });
     //Mostrar empresas
-    axios.get(`http://localhost:3001/vacantes`).then((res) => {
-      const candidatos = res.data;
-      this.setState({ candidatos });
-    });
+    axios
+      .get(`http://localhost:3001/vacantes`, {
+        withCredentials: true,
+        credentials: "include",
+      })
+      .then((res) => {
+        const candidatos = res.data;
+        this.setState({ candidatos });
+      });
 
     window.scrollTo(0, 0);
     alert("OFERTA AGREGADA CON ÉXITO!!!");
@@ -271,12 +294,15 @@ class App extends Component {
         console.log(res.data);
       });
     //Mostrar candidatos
-    /*axios
-      .get(`http://18.219.47.222/apis/bolsadetrabajo/candidatos.php`)
+    axios
+      .get(`http://localhost:3001/estudiantes`, {
+        withCredentials: true,
+        credentials: "include",
+      })
       .then((res) => {
         const candidatos = res.data;
         this.setState({ candidatos });
-      });*/
+      });
 
     window.scrollTo(0, 0);
     alert("CANDIDATO AGREGADO CON ÉXITO!!!");
@@ -333,9 +359,13 @@ class App extends Component {
     console.log(usuario);
     //Crear Usuario
     axios
-      .post(`http://localhost:3001/registro`, {
-        ...usuario,
-      })
+      .post(
+        `http://localhost:3001/registro`,
+        {
+          ...usuario,
+        },
+        { withCredentials: true, credentials: "include" }
+      )
       .then((res) => {
         console.log(res);
         console.log(res.data);

@@ -19,7 +19,7 @@ module.exports = {
         .digest("hex");
       console.log(password);
       let result = await con.execute(
-        `BEGIN insertarEstudiante(:Nombre_Estudiante, :Email, :Pass); END;`,
+        `BEGIN insertarEstudiante(:Nombre_Estudiante, :Email, :Pass, :id_estudiante); END;`,
         {
           Nombre_Estudiante: {
             dir: oracledb.BIND_IN,
@@ -36,6 +36,10 @@ module.exports = {
             val: password,
             type: oracledb.STRING,
           },
+          id_estudiante: {
+            dir: oracledb.BIND_OUT,
+            type: oracledb.DB_TYPE_NUMBER,
+          },
         },
         {
           autoCommit: true,
@@ -43,6 +47,12 @@ module.exports = {
       );
 
       console.log(result.outBinds);
+
+      req.session.isAuthenticated = true;
+      req.session.user_id = result.outBinds.id_estudiante;
+
+      console.log("SESSION");
+      console.log(req.session);
 
       res.json({ data: "successfully registered user" });
     } catch (error) {
