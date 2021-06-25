@@ -213,38 +213,73 @@ class App extends Component {
     const candidato = {
       avatar: "https://image.flaticon.com/icons/png/512/64/64572.png",
       nombre: event.target.nombre.value,
-      apellidoPaterno: event.target.apellidoPaterno.value,
-      apellidoMaterno: event.target.apellidoMaterno.value,
-      fechaDeNacimiento: event.target.fechaDeNacimiento.value,
-      estudios: event.target.estudios.value,
+      apellidos: event.target.apellidos.value,
+      carnet: event.target.carnet.value,
+      sexo: event.target.sexo.value,
+      fecha: event.target.fecha.value,
       titulo: event.target.titulo.value,
       jornada: event.target.jornada.value,
       direccion: event.target.direccion.value,
       ciudad: event.target.ciudad.value,
-      telefono: event.target.telefono.value,
+      telefonoFijo: event.target.telefonoFijo.value,
+      telefonoPersonal: event.target.telefonoPersonal.value,
       email: event.target.email.value,
+      nit: event.target.nit.value,
+      nup: event.target.nup.value,
+      facebook: event.target.facebook.value,
       sueldoMin: event.target.sueldoMin.value,
       sueldoMax: event.target.sueldoMax.value,
       descripcion: event.target.descripcion.value,
-      visible: event.target.visible.value,
+      cv: event.target.upload.files[0],
     };
+
+    let formData = new FormData();
+
+    formData.append("nombre", candidato.nombre);
+    formData.append("apellidos", candidato.apellidos);
+    formData.append("carnet", candidato.carnet);
+    formData.append("sexo", candidato.sexo);
+    formData.append("fecha", candidato.fecha);
+    formData.append("titulo", candidato.titulo);
+    formData.append("jornada", candidato.jornada);
+    formData.append("direccion", candidato.direccion);
+    formData.append("ciudad", candidato.ciudad);
+    formData.append("telefonoFijo", candidato.telefonoFijo);
+    formData.append("telefonoPersonal", candidato.telefonoPersonal);
+    formData.append("email", candidato.email);
+    formData.append("nit", candidato.nit);
+    formData.append("nup", candidato.nup);
+    formData.append("facebook", candidato.facebook);
+    formData.append("sueldoMin", candidato.sueldoMin);
+    formData.append("sueldoMax", candidato.sueldoMax);
+    formData.append("descripcion", candidato.descripcion);
+    formData.append("cv", candidato.cv);
+
+    console.log(candidato);
+
     //Crear candidatos
-    /*  axios.post(`http://18.219.47.222/apis/bolsadetrabajo/insertcandidato.php`, { candidato })
-      .then(res => {
+    axios
+      .post(`http://localhost:3001/actualizar-estudiante`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+        credentials: "include",
+      })
+      .then((res) => {
         console.log(res);
         console.log(res.data);
-      })
-//Mostrar candidatos
-    axios.get(`http://18.219.47.222/apis/bolsadetrabajo/candidatos.php`)
-      .then(res => {
+      });
+    //Mostrar candidatos
+    /*axios
+      .get(`http://18.219.47.222/apis/bolsadetrabajo/candidatos.php`)
+      .then((res) => {
         const candidatos = res.data;
         this.setState({ candidatos });
-      })
+      });*/
 
     window.scrollTo(0, 0);
-    alert('CANDIDATO AGREGADO CON ÉXITO!!!')
-  }
-*/
+    alert("CANDIDATO AGREGADO CON ÉXITO!!!");
   };
   handleSignIn = (event) => {
     event.preventDefault();

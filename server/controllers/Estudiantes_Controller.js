@@ -2,7 +2,7 @@ var estudiante = require("../Models/Estudiante");
 const oracledb = require("oracledb");
 const { getConnection } = require("../db");
 const path = require("path");
-var { createHmac } = require('crypto');
+var { createHmac } = require("crypto");
 
 module.exports = {
   registrarEstudiante: async (req, res) => {
@@ -14,9 +14,9 @@ module.exports = {
       console.log(estudiante);
 
       let con = await getConnection();
-      password = createHmac('sha256', password)
-               .update('I love cupcakes')
-               .digest('hex');
+      password = createHmac("sha256", password)
+        .update("I love cupcakes")
+        .digest("hex");
       console.log(password);
       let result = await con.execute(
         `BEGIN insertarEstudiante(:Nombre_Estudiante, :Email, :Pass); END;`,
@@ -53,38 +53,42 @@ module.exports = {
     let {
       nombre,
       apellidos,
+      carnet,
       sexo,
       fecha,
       titulo,
       jornada,
       direccion,
       ciudad,
-      tlf_fijo,
-      tlf_personal,
+      telefonoFijo,
+      telefonoPersonal,
+      email,
       nit,
       nup,
       facebook,
-      min_sal,
-      max_sal,
+      sueldoMin,
+      sueldoMax,
       descripcion,
     } = req.body;
 
     console.log({
       nombre,
       apellidos,
+      carnet,
       sexo,
       fecha,
       titulo,
       jornada,
       direccion,
       ciudad,
-      tlf_fijo,
-      tlf_personal,
+      telefonoFijo,
+      telefonoPersonal,
+      email,
       nit,
       nup,
       facebook,
-      min_sal,
-      max_sal,
+      sueldoMin,
+      sueldoMax,
       descripcion,
     });
 
@@ -98,15 +102,15 @@ module.exports = {
       let result = await con.execute(
         `
         BEGIN
-            actualizarDatosEstudiante(:id, :nombre, :apellidos, :sexo, :fecha, :titulo, 
-            :jornada, :direccion, :ciudad, :tlf_fijo, :tlf_personal, :nit, 
+            actualizarDatosEstudiante(:id, :nombre, :apellidos, :carnet, :sexo, :fecha, :titulo, 
+            :jornada, :direccion, :ciudad, :telefonoFijo, :telefonoPersonal, :email, :nit, 
             :nup, :facebook, :min, :max, :descripcion, :cv);
         END;
       `,
         {
           id: {
             dir: oracledb.BIND_IN,
-            val: 21,
+            val: Number(req.session.user_id),
             type: oracledb.NUMBER,
           },
           nombre: {
@@ -119,6 +123,11 @@ module.exports = {
             val: apellidos,
             type: oracledb.DB_TYPE_VARCHAR,
           },
+          carnet: {
+            dir: oracledb.BIND_IN,
+            val: carnet,
+            type: oracledb.DB_TYPE_VARCHAR,
+          },
           sexo: {
             dir: oracledb.BIND_IN,
             val: sexo,
@@ -126,7 +135,7 @@ module.exports = {
           },
           fecha: {
             dir: oracledb.BIND_IN,
-            val: new Date(),
+            val: new Date(fecha),
             type: oracledb.DB_TYPE_DATE,
           },
           titulo: {
@@ -149,14 +158,19 @@ module.exports = {
             val: ciudad,
             type: oracledb.DB_TYPE_VARCHAR,
           },
-          tlf_fijo: {
+          telefonoFijo: {
             dir: oracledb.BIND_IN,
-            val: tlf_fijo,
+            val: telefonoFijo,
             type: oracledb.DB_TYPE_VARCHAR,
           },
-          tlf_personal: {
+          telefonoPersonal: {
             dir: oracledb.BIND_IN,
-            val: tlf_personal,
+            val: telefonoPersonal,
+            type: oracledb.DB_TYPE_VARCHAR,
+          },
+          email: {
+            dir: oracledb.BIND_IN,
+            val: email,
             type: oracledb.DB_TYPE_VARCHAR,
           },
           nit: {
@@ -176,12 +190,12 @@ module.exports = {
           },
           min: {
             dir: oracledb.BIND_IN,
-            val: Number(min_sal),
+            val: Number(sueldoMin),
             type: oracledb.DB_TYPE_NUMBER,
           },
           max: {
             dir: oracledb.BIND_IN,
-            val: Number(max_sal),
+            val: Number(sueldoMax),
             type: oracledb.DB_TYPE_NUMBER,
           },
           descripcion: {
@@ -208,23 +222,22 @@ module.exports = {
       res.json([{ error: error.message }]);
     }
   },
-  
+
   MostrarEstudiantesID: async (req, res) => {
     try {
       estudiante = req.body;
 
       let con = await getConnection();
 
-      let result = await con.execute(  
+      let result = await con.execute(
         `SELECT *
         FROM Datos_estudiantes
         WHERE id_Estudiante = :id`,
-     [estudiante.ID_Estudiante],  // bind value for :id
-     { extendedMetaData: true })
+        [estudiante.ID_Estudiante], // bind value for :id
+        { extendedMetaData: true }
+      );
 
-     return result
-    } catch (error) {
-      
-    }
-  }
+      return result;
+    } catch (error) {}
+  },
 };

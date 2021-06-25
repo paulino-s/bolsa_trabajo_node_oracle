@@ -127,35 +127,64 @@ exception
         rollback;
 end;
 
-
-
 create or replace NONEDITIONABLE procedure 
     actualizarDatosEstudiante(
         p_idestudiante datos_estudiante.idestudiante%type,
-        p_nombre datos_estudiante.nombre_estudiante%type,p_apellidos datos_estudiante.apellidos%type,p_sexo datos_estudiante.sexo%type,
-        p_fecha datos_estudiante.fecha_nacimiento%type,p_titulo datos_estudiante.titulo_profesional%type,p_jornada datos_estudiante.tipo_jornada%type,
-        p_direccion datos_estudiante.direccion%type,p_ciudad datos_estudiante.ciudad%type,tlf_fijo datos_estudiante.telefono_fijo%type,
-        tlf_personal datos_estudiante.telefono_personal%type,p_nit datos_estudiante.nit%type,p_nup datos_estudiante.nup%type,
-        p_facebook datos_estudiante.facebook%type,p_sueldo_min datos_estudiante.sueldo_min%type,p_sueldo_max datos_estudiante.sueldo_max%type,
-        p_descripcion datos_estudiante.descripcion%type,p_path_cv datos_estudiante.path_cv%type
+        p_nombre datos_estudiante.nombre_estudiante%type,
+        p_apellidos datos_estudiante.apellidos%type,
+        p_carnet datos_estudiante.carnet%type,
+        p_sexo datos_estudiante.sexo%type,
+        p_fecha datos_estudiante.fecha_nacimiento%type,
+        p_titulo datos_estudiante.titulo_profesional%type,
+        p_jornada datos_estudiante.tipo_jornada%type,
+        p_direccion datos_estudiante.direccion%type,
+        p_ciudad datos_estudiante.ciudad%type,
+        tlf_fijo datos_estudiante.telefono_fijo%type,
+        tlf_personal datos_estudiante.telefono_personal%type,
+        p_email datos_estudiante.email%type,
+        p_nit datos_estudiante.nit%type,
+        p_nup datos_estudiante.nup%type,
+        p_facebook datos_estudiante.facebook%type,
+        p_sueldo_min datos_estudiante.sueldo_min%type,
+        p_sueldo_max datos_estudiante.sueldo_max%type,
+        p_descripcion datos_estudiante.descripcion%type,
+        p_path_cv datos_estudiante.path_cv%type
     )
 is     
 begin
-    update datos_estudiante set nombre_estudiante = p_nombre, apellidos = p_apellidos, sexo = p_sexo,
-        fecha_nacimiento = p_fecha,titulo_profesional = p_titulo, tipo_jornada = p_jornada,
-        direccion = p_direccion, ciudad = p_ciudad, telefono_fijo = tlf_fijo , telefono_personal = tlf_personal ,
-        nit = p_nit, nup = p_nup, facebook = p_facebook, sueldo_min = p_sueldo_min, sueldo_max = p_sueldo_max,
-        descripcion = p_descripcion, path_cv= p_path_cv where idestudiante = p_idestudiante; 
+    update datos_estudiante 
+        set 
+            nombre_estudiante = p_nombre, 
+            apellidos = p_apellidos,
+            carnet = p_carnet, 
+            sexo = p_sexo,
+            fecha_nacimiento = p_fecha,
+            titulo_profesional = p_titulo, 
+            tipo_jornada = p_jornada,
+            direccion = p_direccion, 
+            ciudad = p_ciudad, 
+            telefono_fijo = tlf_fijo ,
+            telefono_personal = tlf_personal ,
+            email = p_email,
+            nit = p_nit,
+            nup = p_nup, 
+            facebook = p_facebook, 
+            sueldo_min = p_sueldo_min, 
+            sueldo_max = p_sueldo_max,
+            descripcion = p_descripcion, 
+            path_cv= p_path_cv
+            where idestudiante = p_idestudiante; 
 exception
     when others then
         dbms_output.put_line(sqlcode||' '||sqlerrm);
 end;
 
-create or replace procedure 
-    verificarUsuario(v_result out var_bolsa_trabajo.cur_usuario, var_user_name usuario.user_name%type)
+create or replace NONEDITIONABLE procedure 
+    verificarUsuario(var_user_name usuario.user_name%type,v_emp out var_bolsa_trabajo.cur_usuario,v_est out var_bolsa_trabajo.cur_usuario)
 is
 begin
-    open v_result for select * from usuario where user_name = var_user_name;
+    open v_emp for select u.idusuario,u.user_name,u.password,e.idempresa from usuario u, registrar_empresas e where u.user_name = var_user_name and u.idusuario = e.idusuario;
+    open v_est for select u.idusuario,u.user_name,u.password,e.idestudiante from usuario u, datos_estudiante e where u.user_name = var_user_name and u.idusuario = e.idusuario;
 exception
     when others then
         dbms_output.put_line(sqlcode||' '||sqlerrm);
@@ -180,8 +209,14 @@ as
         descripcion perfil.descripcion%type,
         habilidades perfil.habilidades%type
     );
+    type t_user is record(
+        id usuario.idusuario%type,
+        username usuario.user_name%type,
+        password usuario.password%type,
+        idtipo integer
+    );
     type cur_ofertas is ref cursor return ofe_emp;
-    type cur_usuario is ref cursor return usuario%rowtype;
+    type cur_usuario is ref cursor return t_user;
 end var_bolsa_trabajo;
 
 
