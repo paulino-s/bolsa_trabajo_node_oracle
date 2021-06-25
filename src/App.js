@@ -279,12 +279,12 @@ class App extends Component {
       .then((res) => {
         console.log(res);
         console.log(res.data);
+        //Mostrar candidatos
+        axios.get(`http://localhost:3001/estudiantes`).then((res) => {
+          const candidatos = res.data;
+          this.setState({ candidatos });
+        });
       });
-    //Mostrar candidatos
-    axios.get(`http://localhost:3001/estudiantes`).then((res) => {
-      const candidatos = res.data;
-      this.setState({ candidatos });
-    });
 
     window.scrollTo(0, 0);
     alert("CANDIDATO AGREGADO CON ÉXITO!!!");

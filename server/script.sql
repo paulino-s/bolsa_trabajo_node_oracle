@@ -69,65 +69,6 @@ NOORDER NOCYCLE NOKEEP NOSCALE GLOBAL;
 
 -- PROCEDIMIENTOS
 
-
-create or replace NONEDITIONABLE PROCEDURE 
-    insertarEstudiante(nombre in datos_estudiante.nombre_estudiante%type , correo_electronico in datos_estudiante.email%type, contra in usuario.password%type)
-is
-begin
-    insert into usuario values(SEQUENCE_USUARIO.nextval,correo_electronico, contra );
-    insert into datos_estudiante (idestudiante,idusuario,nombre_estudiante,email) values(SEQUENCE_ESTUDIANTE.nextval,SEQUENCE_USUARIO.currval , nombre ,correo_electronico );
-    commit;
-exception
-    when others then
-        dbms_output.put_line(sqlcode||' '||sqlerrm);
-end;
-
-
-
-create or replace NONEDITIONABLE procedure
-    insertarEmpresa(nombre registrar_empresas.nombre_completo%type, nom_emp registrar_empresas.nombre%type, email registrar_empresas.email%type,
-    telefono registrar_empresas.telefono%type, pass usuario.password%type)
-is
-begin
-    insert into usuario values(SEQUENCE_USUARIO.nextval, email, pass);
-    insert into registrar_empresas values(sequence_empresa.nextval,SEQUENCE_USUARIO.currval, nombre,nom_emp,email,telefono);
-    commit;
-exception
-    when others then
-        dbms_output.put_line(sqlcode||' '||sqlerrm);
-        rollback;
-end;
-
-
-
-create or replace NONEDITIONABLE procedure
-        insertarPerfil(id_empresa registrar_empresas.idempresa%type,titulo perfil.titulo%type,tipo perfil.tipo%type,
-    rubro perfil.rubro%type,direccion perfil.direccion%type,ciudad perfil.ciudad%type, min_sal perfil.sueldo_min%type,
-    max_sal perfil.sueldo_max%type, habilidades perfil.habilidades%type, descripcion perfil.descripcion%type)
-is
-begin
-    insert into perfil (idperfil,idempresa,titulo,tipo,rubro,direccion,ciudad,sueldo_min,sueldo_max,habilidades,descripcion) values(SEQUENCE_PERFIL.nextval,id_empresa,titulo,tipo,rubro,direccion,ciudad,min_sal,max_sal,habilidades,descripcion);
-    commit;
-exception
-    when others then
-        dbms_output.put_line(sqlcode||' '||sqlerrm);
-        rollback;
-end;
-
-
-
-create or replace NONEDITIONABLE procedure vacantes(c_vacantes out var_bolsa_trabajo.cur_ofertas)
-is
-begin
-    open c_vacantes for select e.idempresa,p.titulo,p.tipo,p.rubro,p.direccion,p.ciudad,p.sueldo_min,
-        p.sueldo_max,e.nombre,e.nombre_completo,p.descripcion,p.habilidades
-            from perfil p inner join registrar_empresas e on p.idempresa = e.idempresa;
-exception
-    when others then
-        dbms_output.put_line(sqlcode||' '||sqlerrm);
-        rollback;
-end;
-
 create or replace NONEDITIONABLE procedure 
     actualizarDatosEstudiante(
         p_idestudiante datos_estudiante.idestudiante%type,
@@ -180,22 +121,91 @@ exception
         dbms_output.put_line(sqlcode||' '||sqlerrm);
 end;
 
-create or replace NONEDITIONABLE procedure 
-    verificarUsuario(var_user_name usuario.user_name%type,v_emp out var_bolsa_trabajo.cur_usuario,v_est out var_bolsa_trabajo.cur_usuario)
+
+create or replace NONEDITIONABLE procedure estudiantes(v_est out var_bolsa_trabajo.cur_estudiantes)
 is
 begin
-    open v_emp for select u.idusuario,u.user_name,u.password,e.idempresa from usuario u, registrar_empresas e where u.user_name = var_user_name and u.idusuario = e.idusuario;
-    open v_est for select u.idusuario,u.user_name,u.password,e.idestudiante from usuario u, datos_estudiante e where u.user_name = var_user_name and u.idusuario = e.idusuario;
+    open v_est for select * from datos_estudiante;
+exception
+    when others then
+        dbms_output.put_line(sqlcode||' '||sqlerrm);
+end;
+
+create or replace NONEDITIONABLE procedure
+    insertarEmpresa(
+        nombre registrar_empresas.nombre_completo%type, 
+        nom_emp registrar_empresas.nombre%type, 
+        email registrar_empresas.email%type,
+        telefono registrar_empresas.telefono%type, 
+        pass usuario.password%type,
+        id_empresa out registrar_empresas.idempresa%type)
+is
+begin
+    insert into usuario values(SEQUENCE_USUARIO.nextval, email, pass);
+    insert into registrar_empresas values(sequence_empresa.nextval,SEQUENCE_USUARIO.currval, nombre,nom_emp,email,telefono);
+    id_empresa := sequence_empresa.currval;
+    commit;
+exception
+    when others then
+        dbms_output.put_line(sqlcode||' '||sqlerrm);
+        rollback;
+end;
+
+create or replace NONEDITIONABLE PROCEDURE 
+    insertarEstudiante(
+        nombre in datos_estudiante.nombre_estudiante%type , 
+        correo_electronico in datos_estudiante.email%type,
+        contra in usuario.password%type,
+        id_estudiante out datos_estudiante.idestudiante%type)
+is
+begin
+    insert into usuario values(SEQUENCE_USUARIO.nextval,correo_electronico, contra );
+    insert into datos_estudiante (idestudiante,idusuario,nombre_estudiante,email) values(SEQUENCE_ESTUDIANTE.nextval,SEQUENCE_USUARIO.currval , nombre ,correo_electronico );
+    id_estudiante := SEQUENCE_ESTUDIANTE.currval; 
+    commit;
 exception
     when others then
         dbms_output.put_line(sqlcode||' '||sqlerrm);
 end;
 
 
-create or replace procedure estudiantes(v_est out var_bolsa_trabajo.cur_estudiantes)
+create or replace NONEDITIONABLE procedure
+        insertarPerfil(id_empresa registrar_empresas.idempresa%type,titulo perfil.titulo%type,tipo perfil.tipo%type,
+    rubro perfil.rubro%type,direccion perfil.direccion%type,ciudad perfil.ciudad%type, min_sal perfil.sueldo_min%type,
+    max_sal perfil.sueldo_max%type, habilidades perfil.habilidades%type, descripcion perfil.descripcion%type)
 is
 begin
-    open v_est for select * from datos_estudiante;
+    insert into perfil (idperfil,idempresa,titulo,tipo,rubro,direccion,ciudad,sueldo_min,sueldo_max,habilidades,descripcion) values(SEQUENCE_PERFIL.nextval,id_empresa,titulo,tipo,rubro,direccion,ciudad,min_sal,max_sal,habilidades,descripcion);
+    commit;
+exception
+    when others then
+        dbms_output.put_line(sqlcode||' '||sqlerrm);
+        rollback;
+end;
+
+create or replace NONEDITIONABLE procedure listarVacantes (vacantes out var_bolsa_trabajo.cur_vacantes) is
+begin
+    open vacantes for select * from perfil;
+end;
+
+create or replace NONEDITIONABLE procedure vacantes(c_vacantes out var_bolsa_trabajo.cur_ofertas)
+is
+begin
+    open c_vacantes for select p.idperfil,p.titulo,p.tipo,p.rubro,p.direccion,p.ciudad,p.sueldo_min,
+        p.sueldo_max,e.nombre,e.nombre_completo,p.descripcion,p.habilidades
+            from perfil p inner join registrar_empresas e on p.idempresa = e.idempresa;
+exception
+    when others then
+        dbms_output.put_line(sqlcode||' '||sqlerrm);
+        rollback;
+end;
+
+create or replace NONEDITIONABLE procedure 
+    verificarUsuario(var_user_name usuario.user_name%type,v_emp out var_bolsa_trabajo.cur_usuario,v_est out var_bolsa_trabajo.cur_usuario)
+is
+begin
+    open v_emp for select u.idusuario,u.user_name,u.password,e.idempresa from usuario u, registrar_empresas e where u.user_name = var_user_name and u.idusuario = e.idusuario;
+    open v_est for select u.idusuario,u.user_name,u.password,e.idestudiante from usuario u, datos_estudiante e where u.user_name = var_user_name and u.idusuario = e.idusuario;
 exception
     when others then
         dbms_output.put_line(sqlcode||' '||sqlerrm);
