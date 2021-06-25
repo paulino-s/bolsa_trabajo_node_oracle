@@ -48,32 +48,54 @@ module.exports = {
     console.log(req.body);
 
     let { emailaddress, password } = req.body;
+
+    console.log({ emailaddress, password });
+
     try {
       let con = await getConnection();
 
       let result = await con.execute(
         `
           BEGIN
-            verificarUsuario(:cursor , :user);
+            verificarUsuario(:user, :cursor_empresa ,:cursor_estudiante);
           END;
         `,
         {
-          cursor: {
-            type: oracledb.DB_TYPE_CURSOR,
-            dir: oracledb.BIND_OUT,
-          },
           user: {
             type: oracledb.DB_TYPE_VARCHAR,
             dir: oracledb.BIND_IN,
             val: emailaddress,
           },
+          cursor_empresa: {
+            type: oracledb.DB_TYPE_CURSOR,
+            dir: oracledb.BIND_OUT,
+          },
+          cursor_estudiante: {
+            type: oracledb.DB_TYPE_CURSOR,
+            dir: oracledb.BIND_OUT,
+          },
         }, // bind value for :id
         { resultSet: true }
       );
 
-      let resultset = result.outBinds.cursor;
+      let rs_emp = result.outBinds.cursor_empresa;
+      let rs_est = result.outBinds.cursor_estudiante;
 
-      let row = await resultset.getRow();
+      let tipo;
+      let row;
+
+      let row_emp = await rs_emp.getRow();
+      let row_est = await rs_est.getRow();
+
+      if (row_emp) {
+        tipo = "empresa";
+        row = row_emp;
+      }
+
+      if (row_est) {
+        tipo = "estudiante";
+        row = row_est;
+      }
 
       console.log("ROW");
       console.log(row);
@@ -86,7 +108,12 @@ module.exports = {
 
       if (password_hash === row[2]) {
         con.release();
-        res.json(row);
+        req.session.isAuthenticated = true;
+        req.session.user_id = row[3];
+
+        console.log(req.session);
+
+        res.json([...row, tipo]);
       } else {
         con.release();
         res.json({
@@ -94,8 +121,22 @@ module.exports = {
         });
       }
     } catch (error) {
+      console.error(error);
       res.json({
-        found: false,
+        error: error.message,
+      });
+    }
+  },
+  logout: (req, res) => {
+    console.log(JSON.stringify(req.session));
+    if (req.session.isAuthenticated) {
+      req.session.destroy();
+      res.json({
+        message: "SESION TERMINADA!!",
+      });
+    } else {
+      res.json({
+        message: "NO HAY SESiON!",
       });
     }
   },

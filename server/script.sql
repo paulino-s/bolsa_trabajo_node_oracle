@@ -151,6 +151,15 @@ exception
         dbms_output.put_line(sqlcode||' '||sqlerrm);
 end;
 
+create or replace procedure 
+    verificarUsuario(v_result out var_bolsa_trabajo.cur_usuario, var_user_name usuario.user_name%type)
+is
+begin
+    open v_result for select * from usuario where user_name = var_user_name;
+exception
+    when others then
+        dbms_output.put_line(sqlcode||' '||sqlerrm);
+end;
 
 --PACKAGE
 
