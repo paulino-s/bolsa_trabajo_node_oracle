@@ -257,9 +257,7 @@ const PublicarCandidato = (props) => {
                             type="number"
                             className="with-border"
                             placeholder="Sin Guion"
-                            min="14"
-                            max="14"
-                            required
+                           
                           />
                         </div>
                       </div>
