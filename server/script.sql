@@ -69,6 +69,8 @@ NOORDER NOCYCLE NOKEEP NOSCALE GLOBAL;
 
 -- PROCEDIMIENTOS
 
+/* */
+
 create or replace NONEDITIONABLE procedure 
     actualizarDatosEstudiante(
         p_idestudiante datos_estudiante.idestudiante%type,
@@ -122,6 +124,8 @@ exception
 end;
 
 
+/* */
+
 create or replace NONEDITIONABLE procedure estudiantes(v_est out var_bolsa_trabajo.cur_estudiantes)
 is
 begin
@@ -130,6 +134,10 @@ exception
     when others then
         dbms_output.put_line(sqlcode||' '||sqlerrm);
 end;
+
+
+/* */
+
 
 create or replace NONEDITIONABLE procedure
     insertarEmpresa(
@@ -151,6 +159,10 @@ exception
         rollback;
 end;
 
+
+/* */
+
+
 create or replace NONEDITIONABLE PROCEDURE 
     insertarEstudiante(
         nombre in datos_estudiante.nombre_estudiante%type , 
@@ -169,6 +181,9 @@ exception
 end;
 
 
+/* */
+
+
 create or replace NONEDITIONABLE procedure
         insertarPerfil(id_empresa registrar_empresas.idempresa%type,titulo perfil.titulo%type,tipo perfil.tipo%type,
     rubro perfil.rubro%type,direccion perfil.direccion%type,ciudad perfil.ciudad%type, min_sal perfil.sueldo_min%type,
@@ -183,10 +198,18 @@ exception
         rollback;
 end;
 
+
+/* */
+
+
 create or replace NONEDITIONABLE procedure listarVacantes (vacantes out var_bolsa_trabajo.cur_vacantes) is
 begin
     open vacantes for select * from perfil;
 end;
+
+
+/* */
+
 
 create or replace NONEDITIONABLE procedure vacantes(c_vacantes out var_bolsa_trabajo.cur_ofertas)
 is
@@ -200,6 +223,10 @@ exception
         rollback;
 end;
 
+
+/* */
+
+
 create or replace NONEDITIONABLE procedure 
     verificarUsuario(var_user_name usuario.user_name%type,v_emp out var_bolsa_trabajo.cur_usuario,v_est out var_bolsa_trabajo.cur_usuario)
 is
@@ -210,6 +237,10 @@ exception
     when others then
         dbms_output.put_line(sqlcode||' '||sqlerrm);
 end;
+
+
+/* */
+
 
 --PACKAGE
 
