@@ -114,7 +114,7 @@ const Empleo = (props) => {
                             <i className="icon-material-outline-local-atm"></i>
                             <span>Sueldo</span>
                             <h5>
-                              ${Heroe.sueldoMin} - ${Heroe.sueldoMax} MX
+                              ${Heroe.sueldoMin} - ${Heroe.sueldoMax} DLL
                             </h5>
                           </li>
                         </ul>
