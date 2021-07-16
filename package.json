@@ -5,6 +5,7 @@
   "homepage": "",
   "dependencies": {
     "axios": "^0.19.2",
+    "eslint-utils": "^3.0.0",
     "gh-pages": "^2.2.0",
     "oracledb": "^5.2.0",
     "react": "^16.14.0",
