@@ -1,8 +1,8 @@
 const oracledb = require("oracledb");
 
 var db = {
-  user: "bolsadb",
-  password: "v1",
+  user: "jobues",
+  password: "jobues",
   connectString: "localhost:1521/XEPDB1",
 };
 

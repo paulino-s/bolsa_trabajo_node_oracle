@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="footer-top-section">
         <div className="container">
           <div className="row">
-            <div className="col-xl-12">
+            <div className="col-xl-2">
               <div className="footer-rows-container">
                
                 <div className="footer-rows-left">
